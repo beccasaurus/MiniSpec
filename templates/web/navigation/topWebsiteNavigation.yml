@@ -1,0 +1,12 @@
+main:
+  - title: '<i class="fab fas fa-file-pdf"></i> PDF'
+    url: "/BeautifulBash.pdf"
+  - title: '<i class="fab fas fa-tablet-alt"></i> ePub'
+    url: "/BeautifulBash.epub"
+  - title: '<i class="fab fas fa-code"></i> Code'
+    url: "https://github.com/beautiful-bash/Beautiful-Bash"
+  - title: '<i class="fas fa-book-open"></i> Read Online'
+    url: "/book"
+  - title: '<i class="fab fa-creative-commons"></i> CC'
+    url: "https://creativecommons.org/licenses/by-nc-sa/3.0/"
+

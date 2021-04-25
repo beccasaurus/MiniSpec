@@ -1,0 +1,1 @@
+<a class="reading-navigation next" href="NEXT-URL" style="float: right;"><i class="fas fa-arrow-alt-circle-right"></i><strong> &nbsp;NEXT-TEXT</strong></a>

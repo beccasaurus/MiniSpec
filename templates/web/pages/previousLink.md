@@ -1,0 +1,1 @@
+<a class="reading-navigation previous" href="PREVIOUS-URL"><i class="fas fa-arrow-alt-circle-left"></i><strong> &nbsp;PREVIOUS-TEXT</strong></a>

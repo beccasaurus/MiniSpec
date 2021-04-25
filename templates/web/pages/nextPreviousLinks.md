@@ -1,0 +1,2 @@
+<a class="reading-navigation next" href="NEXT-URL" style="float: right;"><i class="fas fa-arrow-alt-circle-right"></i><strong> &nbsp;NEXT-TEXT</strong></a>
+<a class="reading-navigation previous" href="PREVIOUS-URL"><i class="fas fa-arrow-alt-circle-left"></i><strong> &nbsp;PREVIOUS-TEXT</strong></a>
