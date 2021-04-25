@@ -1,5 +1,5 @@
 # 🐿️ minispec
 
-> Micro Test Framework for .NET
+> Mini Test Framework for .NET
 
 ---
