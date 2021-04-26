@@ -18,8 +18,8 @@ _Mini Testing Framework for .NET_
 
 ---
 
-<i class="fad fa-terminal"></i> `dotnet add package MiniSpec`  
-<i class="fad fa-terminal"></i> `dotnet tool install MiniSpec`
+<i class="fad fa-terminal"></i> `dotnet add package MiniSpec.Expect`  
+<i class="fad fa-terminal"></i> `dotnet tool install MiniSpec.Console`
 
 **MiniSpec** is _both_ a mini **test framework** _and_ a mini **book** on how it was authored!
 
