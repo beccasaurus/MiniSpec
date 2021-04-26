@@ -12,6 +12,8 @@ page-background: docs/assets/images/background.png
 listings-disable-line-numbers: true
 ---
 
+
+
 \frontmatter
 
 # Introduction
@@ -34,6 +36,10 @@ There are different schools of thought on what tests should _look like_.
 #### xUnit, Behavior-Driven Development (BDD), Gherkin
 
 The most common testing _syntax styles_ are: [xUnit][], [Behavior-Driven Development][BDD], and [Gherkin][].
+
+[xUnit]: https://en.wikipedia.org/wiki/XUnit
+[BDD]: https://en.wikipedia.org/wiki/Behavior-driven_development
+[Gherkin]: https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language
 
 > Note: Behavior-Driven Development is a software _process_, not a code syntax.  
 > However, similar _syntax styles_ have emerged over the years for these different testing paradigms.
@@ -115,6 +121,8 @@ In this book, we will be implementing:
 - BDD syntax where each test is defined using a lambda and uses expectations
 - We will embrace the [top-level statement support][TLS] in C# 9 ( _just for fun!_ )
 
+[TLS]: https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#top-level-statements
+
 #### Why Multiple Syntaxes?
 
 Let's make it flexible so that users can pick and choose! It's fun. Design goals below:
@@ -152,6 +160,8 @@ MiniSpec.Describe((spec) => {
 We will test-drive the development of our testing framework (_test-driven test development!_)
 
 As we're using [Test-Driven Development][TDD] (TDD), the first thing we need is a _failing test_!
+
+[TDD]: https://en.wikipedia.org/wiki/Test-driven_development
 
 ## Writing a Red Test
 
@@ -423,7 +433,7 @@ In value:  Received Args: MyTests.dll
 
 Wonderful. Ok. Our program runs. It gets a list of DLLs. Now let's run the tests in the DLLs!
 
-### Running Tests in DLLs
+### Discovering Tests in DLLs
 
 Our `minispec.exe` program is currently seeing a list of paths to DLL files.
 
@@ -487,9 +497,9 @@ And it looks like we found the test methods which we defined as top-level statem
 
 > Huh. `<<Main>$>g__TestShouldPass|0_0`. I guess _that's_ how local methods are represented.
 
-#### What Now?
+### Running Tests in DLLs
 
-Well, remember our goal? _"do whatever we need to do to make the test pass"_
+What now? Well, remember our goal? _"do whatever we need to do to make the test pass"_
 
 Let's be naive and simply run every static method we find with `Test` in the name.
 
@@ -626,11 +636,15 @@ What do we want our wonderful new test framework to provide?
 - `[ ]` Support DLLS which need to load dependencies
 - `[ ]` Support DLLS which have conflicting dependencies
 
+[DSL]: https://en.wikipedia.org/wiki/Domain-specific_language
+
 #### xUnit Test Syntax DSL
 
 - `[ ]` Support failing if a Test method with a bool return type returns `false`
 - `[ ]` Detect and run `SetUp` and `TearDown` methods before and after _each run_ of a test case
 - `[ ]` Provide an attribute, e.g. `MiniSpec.TestData`, to support [parameterized tests][DDT] (DDT)
+
+[DDT]: https://en.wikipedia.org/wiki/Data-driven_testing
 
 #### BDD Test Syntax DSL
 
@@ -656,6 +670,9 @@ What do we want our wonderful new test framework to provide?
 - `[ ]` Make available via [MyGet][MyGet]
 - `[ ]` Make available via [NuGet][NuGet]
 
+[MyGet]: https://www.myget.org
+[NuGet]: https://www.nuget.org
+
 ## Choose Feature to Implement
 
 Looking at the list, as it is now, it looks pretty daunting.
@@ -675,15 +692,4 @@ Make _sure_ that you _test-drive_ (_and don't forget the Refactor step!_).
 **Have fun!**
 
 # Choose Your Own Adventure
-
-
-[xUnit]: https://en.wikipedia.org/wiki/XUnit
-[BDD]: https://en.wikipedia.org/wiki/Behavior-driven_development
-[Gherkin]: https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language
-[TDD]: https://en.wikipedia.org/wiki/Test-driven_development
-[DSL]: https://en.wikipedia.org/wiki/Domain-specific_language
-[DDT]: https://en.wikipedia.org/wiki/Data-driven_testing
-[TLS]: https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#top-level-statements
-[MyGet]: https://www.myget.org
-[NuGet]: https://www.nuget.org
 

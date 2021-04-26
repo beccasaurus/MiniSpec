@@ -1,0 +1,2 @@
+PARENT compile
+PARENT metadata regenerate

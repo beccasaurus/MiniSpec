@@ -29,17 +29,18 @@ div#footer ul.social-icons a {
 div#main div.sidebar nav.nav__list li em {
   opacity: 85%;
   font-weight: normal;
-  // font-size: 0.9em;
+  font-size: 0.9em;
 }
 
 div#main div.sidebar nav.nav__list li i {
   opacity: 65%;
   font-style: normal;
+  font-size: 0.9em;
 }
 
-// div#main div.sidebar nav.nav__list li strong {
-//   // font-size: 1.1em;
-// }
+div#main div.sidebar nav.nav__list li strong {
+  font-size: 0.9em;
+}
 
 div#main a.reading-navigation {
   opacity: 75%;
@@ -130,7 +131,7 @@ html {
     // }
 
     @include breakpoint($large) {
-      font-size: 18px; // change to whatever
+      font-size: 15px; // change to whatever
     }
 
     // @include breakpoint($x-large) {
@@ -169,7 +170,7 @@ html {
     // }
 
     @include breakpoint($large) {
-      font-size: 16px; // change to whatever
+      font-size: 14px; // change to whatever
     }
 
     // @include breakpoint($x-large) {

@@ -24,11 +24,15 @@ What do we want our wonderful new test framework to provide?
 - `[ ]` Support DLLS which need to load dependencies
 - `[ ]` Support DLLS which have conflicting dependencies
 
+[DSL]: https://en.wikipedia.org/wiki/Domain-specific_language
+
 #### xUnit Test Syntax DSL
 
 - `[ ]` Support failing if a Test method with a bool return type returns `false`
 - `[ ]` Detect and run `SetUp` and `TearDown` methods before and after _each run_ of a test case
 - `[ ]` Provide an attribute, e.g. `MiniSpec.TestData`, to support [parameterized tests][DDT] (DDT)
+
+[DDT]: https://en.wikipedia.org/wiki/Data-driven_testing
 
 #### BDD Test Syntax DSL
 
@@ -53,6 +57,9 @@ What do we want our wonderful new test framework to provide?
 
 - `[ ]` Make available via [MyGet][MyGet]
 - `[ ]` Make available via [NuGet][NuGet]
+
+[MyGet]: https://www.myget.org
+[NuGet]: https://www.nuget.org
 
 ## Choose Feature to Implement
 

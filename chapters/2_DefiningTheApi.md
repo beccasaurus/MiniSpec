@@ -14,6 +14,10 @@ There are different schools of thought on what tests should _look like_.
 
 The most common testing _syntax styles_ are: [xUnit][], [Behavior-Driven Development][BDD], and [Gherkin][].
 
+[xUnit]: https://en.wikipedia.org/wiki/XUnit
+[BDD]: https://en.wikipedia.org/wiki/Behavior-driven_development
+[Gherkin]: https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language
+
 > Note: Behavior-Driven Development is a software _process_, not a code syntax.  
 > However, similar _syntax styles_ have emerged over the years for these different testing paradigms.
 
@@ -93,6 +97,8 @@ In this book, we will be implementing:
 - xUnit syntax where each test is represented by a C# method and uses assertions
 - BDD syntax where each test is defined using a lambda and uses expectations
 - We will embrace the [top-level statement support][TLS] in C# 9 ( _just for fun!_ )
+
+[TLS]: https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#top-level-statements
 
 #### Why Multiple Syntaxes?
 

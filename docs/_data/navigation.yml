@@ -2,12 +2,699 @@ main:
   - title: '<i class="fad fa-book-open"></i> Documentation'
     url: "/docs"
   - title: '<i class="fad fa-glasses-alt"></i> Read Book'
-    url: "/book"
+    url: "/Introduction"
   - title: '<i class="fad fa-file-pdf"></i> PDF'
-    url: "/MiniSpec_HowToAuthorATestingFramework_byRebeccaTaylor.pdf"
+    url: "/HowToAuthorATestingFramework_byRebeccaTaylor.pdf"
   - title: '<i class="fad fa-tablet-alt"></i> ePub'
-    url: "/MiniSpec_HowToAuthorATestingFramework_byRebeccaTaylor.epub"
+    url: "/HowToAuthorATestingFramework_byRebeccaTaylor.epub"
   - title: '<i class="fad fa-code"></i> Code'
     url: "https://github.com/beccasaurus/minispec"
   - title: '<i class="fab fa-creative-commons"></i> CC'
     url: "https://creativecommons.org/licenses/by-nc-sa/3.0/"
+Introduction:
+- title: "Introduction"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Defining_the_API:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "Defining the API"
+  url: "/Defining_the_API"
+  children:
+  - title: "• Conventional Testing Styles"
+    url: "/Conventional_Testing_Styles"
+  - title: "• Choosing a Style to Implement"
+    url: "/Choosing_a_Style_to_Implement"
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Conventional_Testing_Styles:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<strong>Defining the API</strong>"
+  url: "/Defining_the_API"
+  children:
+- title: "• Conventional Testing Styles"
+  url: "/Conventional_Testing_Styles"
+  children:
+  - title: "» xUnit"
+    url: "/Conventional_Testing_Styles/xUnit"
+  - title: "» Behavior-Driven Development"
+    url: "/Conventional_Testing_Styles/Behavior_Driven_Development"
+  - title: "» Gherkin (aka Cucumber)"
+    url: "/Conventional_Testing_Styles/Gherkin_aka_Cucumber"
+- title: "<i>• Choosing a Style to Implement</i>"
+  url: "/Choosing_a_Style_to_Implement"
+  children:
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Conventional_Testing_StylesxUnit:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<strong>Defining the API</strong>"
+  url: "/Defining_the_API"
+  children:
+- title: "• Conventional Testing Styles"
+  url: "/Conventional_Testing_Styles"
+  children:
+  - title: "» xUnit"
+    url: "/Conventional_Testing_Styles/xUnit"
+  - title: "» Behavior-Driven Development"
+    url: "/Conventional_Testing_Styles/Behavior_Driven_Development"
+  - title: "» Gherkin (aka Cucumber)"
+    url: "/Conventional_Testing_Styles/Gherkin_aka_Cucumber"
+- title: "<i>• Choosing a Style to Implement</i>"
+  url: "/Choosing_a_Style_to_Implement"
+  children:
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Conventional_Testing_StylesBehavior_Driven_Development:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<strong>Defining the API</strong>"
+  url: "/Defining_the_API"
+  children:
+- title: "• Conventional Testing Styles"
+  url: "/Conventional_Testing_Styles"
+  children:
+  - title: "» xUnit"
+    url: "/Conventional_Testing_Styles/xUnit"
+  - title: "» Behavior-Driven Development"
+    url: "/Conventional_Testing_Styles/Behavior_Driven_Development"
+  - title: "» Gherkin (aka Cucumber)"
+    url: "/Conventional_Testing_Styles/Gherkin_aka_Cucumber"
+- title: "<i>• Choosing a Style to Implement</i>"
+  url: "/Choosing_a_Style_to_Implement"
+  children:
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Conventional_Testing_StylesGherkin_aka_Cucumber:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<strong>Defining the API</strong>"
+  url: "/Defining_the_API"
+  children:
+- title: "• Conventional Testing Styles"
+  url: "/Conventional_Testing_Styles"
+  children:
+  - title: "» xUnit"
+    url: "/Conventional_Testing_Styles/xUnit"
+  - title: "» Behavior-Driven Development"
+    url: "/Conventional_Testing_Styles/Behavior_Driven_Development"
+  - title: "» Gherkin (aka Cucumber)"
+    url: "/Conventional_Testing_Styles/Gherkin_aka_Cucumber"
+- title: "<i>• Choosing a Style to Implement</i>"
+  url: "/Choosing_a_Style_to_Implement"
+  children:
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Choosing_a_Style_to_Implement:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<strong>Defining the API</strong>"
+  url: "/Defining_the_API"
+  children:
+- title: "<i>• Conventional Testing Styles</i>"
+  url: "/Conventional_Testing_Styles"
+  children:
+- title: "• Choosing a Style to Implement"
+  url: "/Choosing_a_Style_to_Implement"
+  children:
+  - title: "» xUnit Syntax"
+    url: "/Choosing_a_Style_to_Implement/xUnit_Syntax"
+  - title: "» BDD Syntax"
+    url: "/Choosing_a_Style_to_Implement/BDD_Syntax"
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Choosing_a_Style_to_ImplementxUnit_Syntax:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<strong>Defining the API</strong>"
+  url: "/Defining_the_API"
+  children:
+- title: "<i>• Conventional Testing Styles</i>"
+  url: "/Conventional_Testing_Styles"
+  children:
+- title: "• Choosing a Style to Implement"
+  url: "/Choosing_a_Style_to_Implement"
+  children:
+  - title: "» xUnit Syntax"
+    url: "/Choosing_a_Style_to_Implement/xUnit_Syntax"
+  - title: "» BDD Syntax"
+    url: "/Choosing_a_Style_to_Implement/BDD_Syntax"
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Choosing_a_Style_to_ImplementBDD_Syntax:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<strong>Defining the API</strong>"
+  url: "/Defining_the_API"
+  children:
+- title: "<i>• Conventional Testing Styles</i>"
+  url: "/Conventional_Testing_Styles"
+  children:
+- title: "• Choosing a Style to Implement"
+  url: "/Choosing_a_Style_to_Implement"
+  children:
+  - title: "» xUnit Syntax"
+    url: "/Choosing_a_Style_to_Implement/xUnit_Syntax"
+  - title: "» BDD Syntax"
+    url: "/Choosing_a_Style_to_Implement/BDD_Syntax"
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Test_Driven_Test_Development:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "Test-Driven Test Development"
+  url: "/Test_Driven_Test_Development"
+  children:
+  - title: "• Writing a Red Test"
+    url: "/Writing_a_Red_Test"
+  - title: "• Making it Go Green"
+    url: "/Making_it_Go_Green"
+  - title: "• Red, Green, Refactor"
+    url: "/Red_Green_Refactor"
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Writing_a_Red_Test:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<strong>Test-Driven Test Development</strong>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "• Writing a Red Test"
+  url: "/Writing_a_Red_Test"
+  children:
+  - title: "» Project Setup"
+    url: "/Writing_a_Red_Test/Project_Setup"
+  - title: "» Example <code>Tests.cs</code> File"
+    url: "/Writing_a_Red_Test/Example_Tests_cs_File"
+  - title: "» Integration Tests"
+    url: "/Writing_a_Red_Test/Integration_Tests"
+- title: "<i>• Making it Go Green</i>"
+  url: "/Making_it_Go_Green"
+  children:
+- title: "<i>• Red, Green, Refactor</i>"
+  url: "/Red_Green_Refactor"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Writing_a_Red_TestProject_Setup:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<strong>Test-Driven Test Development</strong>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "• Writing a Red Test"
+  url: "/Writing_a_Red_Test"
+  children:
+  - title: "» Project Setup"
+    url: "/Writing_a_Red_Test/Project_Setup"
+  - title: "» Example <code>Tests.cs</code> File"
+    url: "/Writing_a_Red_Test/Example_Tests_cs_File"
+  - title: "» Integration Tests"
+    url: "/Writing_a_Red_Test/Integration_Tests"
+- title: "<i>• Making it Go Green</i>"
+  url: "/Making_it_Go_Green"
+  children:
+- title: "<i>• Red, Green, Refactor</i>"
+  url: "/Red_Green_Refactor"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Writing_a_Red_TestExample_Tests_cs_File:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<strong>Test-Driven Test Development</strong>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "• Writing a Red Test"
+  url: "/Writing_a_Red_Test"
+  children:
+  - title: "» Project Setup"
+    url: "/Writing_a_Red_Test/Project_Setup"
+  - title: "» Example <code>Tests.cs</code> File"
+    url: "/Writing_a_Red_Test/Example_Tests_cs_File"
+  - title: "» Integration Tests"
+    url: "/Writing_a_Red_Test/Integration_Tests"
+- title: "<i>• Making it Go Green</i>"
+  url: "/Making_it_Go_Green"
+  children:
+- title: "<i>• Red, Green, Refactor</i>"
+  url: "/Red_Green_Refactor"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Writing_a_Red_TestIntegration_Tests:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<strong>Test-Driven Test Development</strong>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "• Writing a Red Test"
+  url: "/Writing_a_Red_Test"
+  children:
+  - title: "» Project Setup"
+    url: "/Writing_a_Red_Test/Project_Setup"
+  - title: "» Example <code>Tests.cs</code> File"
+    url: "/Writing_a_Red_Test/Example_Tests_cs_File"
+  - title: "» Integration Tests"
+    url: "/Writing_a_Red_Test/Integration_Tests"
+- title: "<i>• Making it Go Green</i>"
+  url: "/Making_it_Go_Green"
+  children:
+- title: "<i>• Red, Green, Refactor</i>"
+  url: "/Red_Green_Refactor"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Making_it_Go_Green:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<strong>Test-Driven Test Development</strong>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<i>• Writing a Red Test</i>"
+  url: "/Writing_a_Red_Test"
+  children:
+- title: "• Making it Go Green"
+  url: "/Making_it_Go_Green"
+  children:
+  - title: "» MiniSpec Project"
+    url: "/Making_it_Go_Green/MiniSpec_Project"
+  - title: "» <code>minispec.exe</code>"
+    url: "/Making_it_Go_Green/minispec_exe"
+  - title: "» Run the Integration Test"
+    url: "/Making_it_Go_Green/Run_the_Integration_Test"
+  - title: "» Discovering Tests in DLLs"
+    url: "/Making_it_Go_Green/Discovering_Tests_in_DLLs"
+  - title: "» Running Tests in DLLs"
+    url: "/Making_it_Go_Green/Running_Tests_in_DLLs"
+- title: "<i>• Red, Green, Refactor</i>"
+  url: "/Red_Green_Refactor"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Making_it_Go_GreenMiniSpec_Project:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<strong>Test-Driven Test Development</strong>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<i>• Writing a Red Test</i>"
+  url: "/Writing_a_Red_Test"
+  children:
+- title: "• Making it Go Green"
+  url: "/Making_it_Go_Green"
+  children:
+  - title: "» MiniSpec Project"
+    url: "/Making_it_Go_Green/MiniSpec_Project"
+  - title: "» <code>minispec.exe</code>"
+    url: "/Making_it_Go_Green/minispec_exe"
+  - title: "» Run the Integration Test"
+    url: "/Making_it_Go_Green/Run_the_Integration_Test"
+  - title: "» Discovering Tests in DLLs"
+    url: "/Making_it_Go_Green/Discovering_Tests_in_DLLs"
+  - title: "» Running Tests in DLLs"
+    url: "/Making_it_Go_Green/Running_Tests_in_DLLs"
+- title: "<i>• Red, Green, Refactor</i>"
+  url: "/Red_Green_Refactor"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Making_it_Go_Greenminispec_exe:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<strong>Test-Driven Test Development</strong>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<i>• Writing a Red Test</i>"
+  url: "/Writing_a_Red_Test"
+  children:
+- title: "• Making it Go Green"
+  url: "/Making_it_Go_Green"
+  children:
+  - title: "» MiniSpec Project"
+    url: "/Making_it_Go_Green/MiniSpec_Project"
+  - title: "» <code>minispec.exe</code>"
+    url: "/Making_it_Go_Green/minispec_exe"
+  - title: "» Run the Integration Test"
+    url: "/Making_it_Go_Green/Run_the_Integration_Test"
+  - title: "» Discovering Tests in DLLs"
+    url: "/Making_it_Go_Green/Discovering_Tests_in_DLLs"
+  - title: "» Running Tests in DLLs"
+    url: "/Making_it_Go_Green/Running_Tests_in_DLLs"
+- title: "<i>• Red, Green, Refactor</i>"
+  url: "/Red_Green_Refactor"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Making_it_Go_GreenRun_the_Integration_Test:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<strong>Test-Driven Test Development</strong>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<i>• Writing a Red Test</i>"
+  url: "/Writing_a_Red_Test"
+  children:
+- title: "• Making it Go Green"
+  url: "/Making_it_Go_Green"
+  children:
+  - title: "» MiniSpec Project"
+    url: "/Making_it_Go_Green/MiniSpec_Project"
+  - title: "» <code>minispec.exe</code>"
+    url: "/Making_it_Go_Green/minispec_exe"
+  - title: "» Run the Integration Test"
+    url: "/Making_it_Go_Green/Run_the_Integration_Test"
+  - title: "» Discovering Tests in DLLs"
+    url: "/Making_it_Go_Green/Discovering_Tests_in_DLLs"
+  - title: "» Running Tests in DLLs"
+    url: "/Making_it_Go_Green/Running_Tests_in_DLLs"
+- title: "<i>• Red, Green, Refactor</i>"
+  url: "/Red_Green_Refactor"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Making_it_Go_GreenDiscovering_Tests_in_DLLs:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<strong>Test-Driven Test Development</strong>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<i>• Writing a Red Test</i>"
+  url: "/Writing_a_Red_Test"
+  children:
+- title: "• Making it Go Green"
+  url: "/Making_it_Go_Green"
+  children:
+  - title: "» MiniSpec Project"
+    url: "/Making_it_Go_Green/MiniSpec_Project"
+  - title: "» <code>minispec.exe</code>"
+    url: "/Making_it_Go_Green/minispec_exe"
+  - title: "» Run the Integration Test"
+    url: "/Making_it_Go_Green/Run_the_Integration_Test"
+  - title: "» Discovering Tests in DLLs"
+    url: "/Making_it_Go_Green/Discovering_Tests_in_DLLs"
+  - title: "» Running Tests in DLLs"
+    url: "/Making_it_Go_Green/Running_Tests_in_DLLs"
+- title: "<i>• Red, Green, Refactor</i>"
+  url: "/Red_Green_Refactor"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Making_it_Go_GreenRunning_Tests_in_DLLs:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<strong>Test-Driven Test Development</strong>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<i>• Writing a Red Test</i>"
+  url: "/Writing_a_Red_Test"
+  children:
+- title: "• Making it Go Green"
+  url: "/Making_it_Go_Green"
+  children:
+  - title: "» MiniSpec Project"
+    url: "/Making_it_Go_Green/MiniSpec_Project"
+  - title: "» <code>minispec.exe</code>"
+    url: "/Making_it_Go_Green/minispec_exe"
+  - title: "» Run the Integration Test"
+    url: "/Making_it_Go_Green/Run_the_Integration_Test"
+  - title: "» Discovering Tests in DLLs"
+    url: "/Making_it_Go_Green/Discovering_Tests_in_DLLs"
+  - title: "» Running Tests in DLLs"
+    url: "/Making_it_Go_Green/Running_Tests_in_DLLs"
+- title: "<i>• Red, Green, Refactor</i>"
+  url: "/Red_Green_Refactor"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Red_Green_Refactor:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<strong>Test-Driven Test Development</strong>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<i>• Writing a Red Test</i>"
+  url: "/Writing_a_Red_Test"
+  children:
+- title: "<i>• Making it Go Green</i>"
+  url: "/Making_it_Go_Green"
+  children:
+- title: "• Red, Green, Refactor"
+  url: "/Red_Green_Refactor"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Planning_Phase:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "Planning Phase"
+  url: "/Planning_Phase"
+  children:
+  - title: "• Brainstorm Features"
+    url: "/Brainstorm_Features"
+  - title: "• Choose Feature to Implement"
+    url: "/Choose_Feature_to_Implement"
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Brainstorm_Features:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<strong>Planning Phase</strong>"
+  url: "/Planning_Phase"
+  children:
+- title: "• Brainstorm Features"
+  url: "/Brainstorm_Features"
+  children:
+- title: "<i>• Choose Feature to Implement</i>"
+  url: "/Choose_Feature_to_Implement"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Choose_Feature_to_Implement:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<strong>Planning Phase</strong>"
+  url: "/Planning_Phase"
+  children:
+- title: "<i>• Brainstorm Features</i>"
+  url: "/Brainstorm_Features"
+  children:
+- title: "• Choose Feature to Implement"
+  url: "/Choose_Feature_to_Implement"
+  children:
+- title: "<em>Choose Your Own Adventure</em>"
+  url: "/Choose_Your_Own_Adventure"
+  children:
+Choose_Your_Own_Adventure:
+- title: "<em>Introduction</em>"
+  url: "/Introduction"
+  children:
+- title: "<em>Defining the API</em>"
+  url: "/Defining_the_API"
+  children:
+- title: "<em>Test-Driven Test Development</em>"
+  url: "/Test_Driven_Test_Development"
+  children:
+- title: "<em>Planning Phase</em>"
+  url: "/Planning_Phase"
+  children:
+- title: "Choose Your Own Adventure"
+  url: "/Choose_Your_Own_Adventure"
+  children:

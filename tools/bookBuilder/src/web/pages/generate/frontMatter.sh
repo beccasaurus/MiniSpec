@@ -1,0 +1,5 @@
+local pageFrontMatter="$( < "$WEB_PAGE_FRONTMATTER_TEMPLATE_FILE" )"
+pageFrontMatter="${pageFrontMatter//TITLE/$1}"
+pageFrontMatter="${pageFrontMatter//PERMALINK/$2}"
+pageFrontMatter="${pageFrontMatter//NAV/${3:-none}}"
+printf '%s' "$pageFrontMatter"
