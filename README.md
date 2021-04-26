@@ -10,6 +10,8 @@ _Currently just using this as a fun C# refresher project!_
 
 ---
 
+## MiniSpec Syntax
+
 ```cs
 using static MiniSpec.Expect; // Optional assertion library
 
@@ -27,3 +29,7 @@ void DogTests() {
   }
 }
 ```
+
+## MiniSpec Tutorial Book
+
+![Book Cover - MiniSpec - How-to Author a Testing Framework in .NET - by Rebecca Taylor](docs/assets/images/cover.png)
