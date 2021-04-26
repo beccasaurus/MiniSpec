@@ -1,1 +1,6 @@
 .comments
+tex2pdf*
+bin/
+obj/
+*.dll
+*.pdb

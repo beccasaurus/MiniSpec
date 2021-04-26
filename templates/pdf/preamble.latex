@@ -1,5 +1,4 @@
 \usepackage{lipsum}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric}
-
 \newcommand\threedots{\vspace*{2mm}\noindent\begin{tikzpicture}\pgfmathsetmacro{\a}{\textwidth/2}\path (0,0);\path (\a pt,0) node[scale=5,black]{$\cdots$};\end{tikzpicture}\vspace*{2mm}}

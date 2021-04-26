@@ -729,8 +729,8 @@ $if(listings)$
 %
 % general listing colors
 %
-\definecolor{listing-background}{HTML}{F7F7F7}
-\definecolor{listing-rule}{HTML}{B3B2B3}
+\definecolor{listing-background}{HTML}{FFFFFF}
+\definecolor{listing-rule}{HTML}{EEEEEE}
 \definecolor{listing-numbers}{HTML}{B3B2B3}
 \definecolor{listing-text-color}{HTML}{000000}
 \definecolor{listing-keyword}{HTML}{435489}
@@ -741,20 +741,23 @@ $if(listings)$
 \definecolor{listing-comment}{HTML}{8E8E8E}
 
 \lstdefinestyle{eisvogel_listing_style}{
-  language         = java,
+  language         = [Sharp]C,
 $if(listings-disable-line-numbers)$
-  xleftmargin      = 0.6em,
-  framexleftmargin = 0.4em,
+  xleftmargin      = 1.2em,
+  framexleftmargin = 1.0em,
 $else$
   numbers          = left,
   xleftmargin      = 2.7em,
   framexleftmargin = 2.5em,
 $endif$
+  framextopmargin = 0.5em,
+  framexbottommargin = 0.5em,
   backgroundcolor  = \color{listing-background},
-  basicstyle       = \color{listing-text-color}\linespread{1.0}$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$\ttfamily{},
+  basicstyle       = \color{listing-text-color}\linespread{1.2}$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$\ttfamily{},
   breaklines       = true,
-  frame            = single,
+  frame            = shadowbox,
   framesep         = 0.19em,
+  framerule        = 0.1em,
   rulecolor        = \color{listing-rule},
   frameround       = ffff,
   tabsize          = 4,

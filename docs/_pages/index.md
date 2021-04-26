@@ -47,7 +47,7 @@ using MiniSpec;
 
 var dog = new Dog();
 
-static void DogCanBark() {
+void TestDogCanBark() {
   Assert(dog.bark()).Equals("Woof!");
 }
 ```
