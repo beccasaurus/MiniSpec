@@ -42,6 +42,16 @@ var dog = new Dog();
 bool TestDogCanBark() => dog.bark() == "Woof!";
 ```
 
+```cs
+using static MiniSpec.Expect; // Optional
+
+var dog = new Dog();
+
+bool TestDogCanBark() {
+  Expect(dog.bark()).ToEqual("Woof!");
+}
+```
+
 <hr style="clear: left;" />
 
 [BDD]: https://en.wikipedia.org/wiki/Behavior-driven_development
