@@ -218,7 +218,7 @@ local partTitle chapterTitle sectionTitle subSectionTitle smallSectionTitle mino
             esac
           done
           
-          bookBuilder pdf updateTemplate
+          bookBuilder pdf updateTemplate "$pdfLatexFile"
           
           cp "$pdfSourceHeader" "$PDF_FULL_SOURCE_FILE"
           echo >> "$PDF_FULL_SOURCE_FILE"
@@ -256,15 +256,16 @@ local partTitle chapterTitle sectionTitle subSectionTitle smallSectionTitle mino
             ;;
         "updateTemplate")
         ## @command bookBuilder pdf updateTemplate
-          bookBuilder log light cyan "- Updating installed $PDF_LATEX_TEMPLATE_NAME template"
-          
+          bookBuilder log bold cyan "- Updating installed $PDF_LATEX_TEMPLATE_NAME template"
           
           mkdir -p "$PDF_PANDOC_TEMPLATE_DIRECTORY"
-          if [ -n "$pdfLatexFile" ]
+          if (( $# > 0 ))
           then
-            cp "$pdfLatexFile" "$PDF_PANDOC_TEMPLATE_DIRECTORY/"
+            bookBuilder log light cyan "- $1 --> $PDF_PANDOC_TEMPLATE_DIRECTORY/$PDF_LATEX_TEMPLATE_NAME.latex"
+            cp "$1" "$PDF_PANDOC_TEMPLATE_DIRECTORY/$PDF_LATEX_TEMPLATE_NAME.latex"
           else
-            cp "$PDF_LATEX_SIMPLE_TEMPLATE_FILE" "$PDF_PANDOC_TEMPLATE_DIRECTORY/"
+            bookBuilder log light cyan "- $PDF_LATEX_SIMPLE_TEMPLATE_FILE --> $PDF_PANDOC_TEMPLATE_DIRECTORY/$PDF_LATEX_TEMPLATE_NAME.latex"
+            cp "$PDF_LATEX_SIMPLE_TEMPLATE_FILE" "$PDF_PANDOC_TEMPLATE_DIRECTORY/$PDF_LATEX_TEMPLATE_NAME.latex"
           fi
         ## @
   

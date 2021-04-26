@@ -18,7 +18,7 @@ do
   esac
 done
 
-PARENT updateTemplate
+PARENT updateTemplate "$pdfLatexFile"
 
 cp "$pdfSourceHeader" "$PDF_FULL_SOURCE_FILE"
 echo >> "$PDF_FULL_SOURCE_FILE"
