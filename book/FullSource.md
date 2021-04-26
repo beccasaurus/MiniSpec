@@ -1,17 +1,4 @@
 ---
-permalink: /docs
-title: "👓 Book"
-layout: singleWithoutTitle
-author_profile: true
-show_links: true
-# sidebar:
-#   nav: BookParts
-show_download_button: true
-always_show_sidebar: true
-class: docs
----
-
----
 title: "MiniSpec"
 subtitle: "How-to Author a Testing Framework in .NET"
 author: ["Rebecca Taylor"]
@@ -25,11 +12,11 @@ page-background: docs/assets/images/background.png
 listings-disable-line-numbers: true
 ---
 
-
+\frontmatter
 
 # Introduction
 
-
+\mainmatter
 
 
 # Defining the API
@@ -247,7 +234,7 @@ We'll create a test which:
 
 > What is `minispec.exe`? It doesn't exist yet, but that's the program we'll make to run tests!
 
-
+\pagebreak
 
 Rename `UnitTest1.cs` to `IntegrationTest.cs` and replace its content with the following:
 
@@ -289,7 +276,7 @@ public class IntegrationTest {
 }
 ```
 
-
+\pagebreak
 
 #### Review
 
@@ -475,7 +462,7 @@ foreach (var dll in args) {
 - Loop over every instance method on the type (_and print out the method name_)
 - Loop over every static method on the type (_and print out the method name_)
 
-
+\pagebreak
 
 Run the tests again with `dotnet test` (_excerpt below_)
 

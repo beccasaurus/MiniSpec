@@ -18,6 +18,9 @@ _Mini Testing Framework for .NET_
 
 ---
 
+<i class="fad fa-terminal"></i> `dotnet add package MiniSpec`  
+<i class="fad fa-terminal"></i> `dotnet tool install MiniSpec`
+
 **MiniSpec** is _both_ a mini **test framework** _and_ a mini **book** on how it was authored!
 
 ### Why?
@@ -30,27 +33,25 @@ _Mini Testing Framework for .NET_
 
 ### The Testing Framework
 
-As part of the experiment, I wanted to support both [BDD][]-style and [xUnit][]-style tests:
+As part of the experiment, I wanted to support both [xUnit][]-style and [BDD][]-style tests:
 
 ```cs
-using MiniSpec;
+// MyTest.cs (no using statement required)
 
 var dog = new Dog();
 
-Spec.test("Dog can bark", () => {
-  Expect(dog.Bark()).ToEqual("Woof!");
+bool TestDogCanBark() => dog.bark() == "Woof!";
+```
+
+```cs
+using static MiniSpec.BDD;
+
+Describe("Dog", _ => {
+  _.it("can bark", _ => dog.Bark() == "Woof!");
 });
 ```
 
-```cs
-using MiniSpec;
-
-var dog = new Dog();
-
-void TestDogCanBark() {
-  Assert(dog.bark()).Equals("Woof!");
-}
-```
+<hr style="clear: left;" />
 
 [BDD]: https://en.wikipedia.org/wiki/Behavior-driven_development
 [xUnit]: https://en.wikipedia.org/wiki/XUnit

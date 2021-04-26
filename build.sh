@@ -48,6 +48,7 @@ do
   echo "$chapter --> $fullSource"
   cat "$chapter" >> $fullSource
   echo >> $fullSource
+  echo >> $fullSource
 done
 
 cp $websiteFileHeader $websiteSourceFile

@@ -1,7 +1,7 @@
 main:
   - title: '<i class="fad fa-book-open"></i> Documentation'
     url: "/docs"
-  - title: '<i class="fad fa-download"></i> Download'
+  - title: '<i class="fad fa-glasses-alt"></i> Read Book'
     url: "/docs#install"
   - title: '<i class="fad fa-file-pdf"></i> PDF'
     url: "/MiniSpec_HowToAuthorATestingFramework_byRebeccaTaylor.pdf"

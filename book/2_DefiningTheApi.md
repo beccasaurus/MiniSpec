@@ -108,6 +108,7 @@ void TearDown() { /* do something */ }
 void TestSomething() {
   AssertEquals(42, TheAnswer);
 }
+bool TestAnotherThing => 1 == 2;
 ```
 
 ### BDD Syntax
