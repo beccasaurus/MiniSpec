@@ -31,24 +31,15 @@ _Mini Testing Framework for .NET_
 > Please do not author your own testing framework unless there's a good reason.  
 > This is meant to be a fun learning exercise, use conventional tools instead.
 
-### The Testing Framework
-
-As part of the experiment, I wanted to support both [xUnit][]-style and [BDD][]-style tests:
+### MiniSpec Syntax
 
 ```cs
 // MyTest.cs (no using statement required)
+//           (supports C# 9 top-level statements)
 
 var dog = new Dog();
 
 bool TestDogCanBark() => dog.bark() == "Woof!";
-```
-
-```cs
-using static MiniSpec.BDD;
-
-Describe("Dog", _ => {
-  _.it("can bark", _ => dog.Bark() == "Woof!");
-});
 ```
 
 <hr style="clear: left;" />
