@@ -40,24 +40,15 @@ What do we want our wonderful new test framework to provide?
 
 [DDT]: https://en.wikipedia.org/wiki/Data-driven_testing
 
-#### BDD Test Syntax DSL
-
-- `[ ]` Support defining and running tests via `spec.It`
-- `[ ]` Support defining `Before` and `After` actions and run them before _each run_ of a test case
-- `[ ]` Provide a way of defining parameterized tests, e.g. `spec.WithInputs`
-
 #### Assertions & Expectations
 
 - `[ ]` Should work fine with `xUnit` assertions
 - `[ ]` Should work fine with `NUnit` assertions
 - `[ ]` Should work fine with `FluentAssertions`
-- `[ ]` `using MiniSpec` - `Expect.That(TheAnswer).Equals(42)`
-- `[ ]` `using static MiniSpec.Expect` - `Expect(TheAnswer).ToEqual(42)`
-- `[ ]` `using MiniSpec` - `Assert.That(TheAnswer).Equals(42)`
-- `[ ]` `using static MiniSpec.Assert` - `AssertEqual(42, TheAnswer)`
-- `[ ]` Extensibility so it's easy to add comparisons (to both `Assert` and `Expect`)
-- `[ ]` Assertion/Expectation for `.Contains`
-- `[ ]` Assertion/Expectation for `.Fails` to assert blocks of code throw Exceptions
+- `[ ]` Extensibility so it's easy to add your own `Expect()` assertions
+- `[ ]` `Expect().ToEqual`
+- `[ ]` `Expect().ToContain`
+- `[ ]` `Expect(() => { ... }).ToFail("Kaboom!")`
 
 #### Distribution
 

@@ -22,9 +22,9 @@ xUnit-style syntax typically...
 ```cs
 class DogTests {
 	Dog dog;
-	setUp() { dog = new Dog(); }
-	testBark() {  
-		assertEqual("Woof!", dog.Bark());
+	SetUp() { dog = new Dog(); }
+	TestBark() {  
+		AssertEqual("Woof!", dog.Bark());
 	}
 }
 ```

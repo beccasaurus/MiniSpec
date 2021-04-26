@@ -2,11 +2,11 @@ main:
   - title: '<i class="fad fa-book-open"></i> Documentation'
     url: "/docs"
   - title: '<i class="fad fa-glasses-alt"></i> Read Book'
-    url: "/Introduction"
+    url: "/book"
   - title: '<i class="fad fa-file-pdf"></i> PDF'
-    url: "/HowToAuthorATestingFramework_byRebeccaTaylor.pdf"
+    url: "/MiniSpec_HowToAuthorATestingFramework_byRebeccaTaylor.pdf"
   - title: '<i class="fad fa-tablet-alt"></i> ePub'
-    url: "/HowToAuthorATestingFramework_byRebeccaTaylor.epub"
+    url: "/MiniSpec_HowToAuthorATestingFramework_byRebeccaTaylor.epub"
   - title: '<i class="fad fa-code"></i> Code'
     url: "https://github.com/beccasaurus/minispec"
   - title: '<i class="fab fa-creative-commons"></i> CC'
@@ -172,10 +172,8 @@ Choosing_a_Style_to_Implement:
 - title: "• Choosing a Style to Implement"
   url: "/Choosing_a_Style_to_Implement"
   children:
-  - title: "» xUnit Syntax"
-    url: "/Choosing_a_Style_to_Implement/xUnit_Syntax"
-  - title: "» BDD Syntax"
-    url: "/Choosing_a_Style_to_Implement/BDD_Syntax"
+  - title: "» MiniSpec Syntax"
+    url: "/Choosing_a_Style_to_Implement/MiniSpec_Syntax"
 - title: "<em>Test-Driven Test Development</em>"
   url: "/Test_Driven_Test_Development"
   children:
@@ -185,7 +183,7 @@ Choosing_a_Style_to_Implement:
 - title: "<em>Choose Your Own Adventure</em>"
   url: "/Choose_Your_Own_Adventure"
   children:
-Choosing_a_Style_to_ImplementxUnit_Syntax:
+Choosing_a_Style_to_ImplementMiniSpec_Syntax:
 - title: "<em>Introduction</em>"
   url: "/Introduction"
   children:
@@ -198,36 +196,8 @@ Choosing_a_Style_to_ImplementxUnit_Syntax:
 - title: "• Choosing a Style to Implement"
   url: "/Choosing_a_Style_to_Implement"
   children:
-  - title: "» xUnit Syntax"
-    url: "/Choosing_a_Style_to_Implement/xUnit_Syntax"
-  - title: "» BDD Syntax"
-    url: "/Choosing_a_Style_to_Implement/BDD_Syntax"
-- title: "<em>Test-Driven Test Development</em>"
-  url: "/Test_Driven_Test_Development"
-  children:
-- title: "<em>Planning Phase</em>"
-  url: "/Planning_Phase"
-  children:
-- title: "<em>Choose Your Own Adventure</em>"
-  url: "/Choose_Your_Own_Adventure"
-  children:
-Choosing_a_Style_to_ImplementBDD_Syntax:
-- title: "<em>Introduction</em>"
-  url: "/Introduction"
-  children:
-- title: "<strong>Defining the API</strong>"
-  url: "/Defining_the_API"
-  children:
-- title: "<i>• Conventional Testing Styles</i>"
-  url: "/Conventional_Testing_Styles"
-  children:
-- title: "• Choosing a Style to Implement"
-  url: "/Choosing_a_Style_to_Implement"
-  children:
-  - title: "» xUnit Syntax"
-    url: "/Choosing_a_Style_to_Implement/xUnit_Syntax"
-  - title: "» BDD Syntax"
-    url: "/Choosing_a_Style_to_Implement/BDD_Syntax"
+  - title: "» MiniSpec Syntax"
+    url: "/Choosing_a_Style_to_Implement/MiniSpec_Syntax"
 - title: "<em>Test-Driven Test Development</em>"
   url: "/Test_Driven_Test_Development"
   children:

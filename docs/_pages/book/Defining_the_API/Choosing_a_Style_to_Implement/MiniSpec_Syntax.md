@@ -1,24 +1,23 @@
 ---
-permalink: /Choosing_a_Style_to_Implement/xUnit_Syntax
-title: "xUnit Syntax"
+permalink: /Choosing_a_Style_to_Implement/MiniSpec_Syntax
+title: "MiniSpec Syntax"
 layout: singleWithoutTitle
 author_profile: true
 sidebar:
-  nav: Choosing_a_Style_to_ImplementxUnit_Syntax
+  nav: Choosing_a_Style_to_ImplementMiniSpec_Syntax
 ---
 
 <h1><a href="/Defining_the_API">Defining the API</a></h1>
 
 <h2><a href="/Choosing_a_Style_to_Implement">Choosing a Style to Implement</a></h2>
 
-### xUnit Syntax
+### MiniSpec Syntax
 
 ```cs
 // Simple tests may simply return a Boolean:
 bool TestAnotherThing => 1 == 2;
 
 // Developers may optionally include our Expect() method.
-// Or they may use existing xUnit/NUnit assertions.
 using static MiniSpec.Expect;
 
 // Expect() can be used with simple one-line tests:
@@ -36,13 +35,10 @@ void TearDown() { /* do something */ }
 // Tests may also be grouped within a class
 class MyTests {
   bool PassingTest => true;
-  bool FailingTest => false;
 
   // Or even grouped within a method
   static void Group() {
-    bool LocalTestFunction() {
-      Expect("This Syntax").To.Work.OK;
-    }
+    bool LocalTestFunction() => Expect("This Syntax").To.Work.OK;
   }
 }
 ```

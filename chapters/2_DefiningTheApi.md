@@ -32,9 +32,9 @@ xUnit-style syntax typically...
 ```cs
 class DogTests {
 	Dog dog;
-	setUp() { dog = new Dog(); }
-	testBark() {  
-		assertEqual("Woof!", dog.Bark());
+	SetUp() { dog = new Dog(); }
+	TestBark() {  
+		AssertEqual("Woof!", dog.Bark());
 	}
 }
 ```
@@ -49,10 +49,10 @@ BDD-style syntax typically...
 
 ```cs
 Dog dog;
-describe("Dog", () => {
-  before() { dog = new Dog(); }
-  it("can bark", () => {
-    expect(dog.Bark()).toEqual("Woof!");
+Describe("Dog", () => {
+  Before(() => { dog = new Dog(); });
+  It("can bark", () => {
+    Expect(dog.Bark()).ToEqual("Woof!");
   });
 });
 ```
@@ -94,39 +94,40 @@ You can implement whatever you like! Whatever syntax your heart desires `<3`
 
 In this book, we will be implementing:
 
-- xUnit syntax where each test is represented by a C# method and uses assertions
-- BDD syntax where each test is defined using a lambda and uses expectations
+- xUnit syntax where each test is represented by a C# method
 - We will embrace the [top-level statement support][TLS] in C# 9 ( _just for fun!_ )
+- We will provide an optional `Expect()` method for assertions
 
 [TLS]: https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#top-level-statements
 
-#### Why Multiple Syntaxes?
-
-Let's make it flexible so that users can pick and choose! It's fun. Design goals below:
-
-### xUnit Syntax
+### MiniSpec Syntax
 
 ```cs
-using static MiniSpec.Assert;
-
-void SetUp() { /* do something */ }
-void TearDown() { /* do something */ }
-void TestSomething() {
-  AssertEquals(42, TheAnswer);
-}
+// Simple tests may simply return a Boolean:
 bool TestAnotherThing => 1 == 2;
-```
 
-### BDD Syntax
-
-```cs
+// Developers may optionally include our Expect() method.
 using static MiniSpec.Expect;
 
-MiniSpec.Describe((spec) => {
-  spec.Before(() => { /* do something */ });
-  spec.After(() => { /* do something */ });
-  spec.It("does something", () => {
-    Expect(TheAnswer).ToEqual(42);
-  });
-});
+// Expect() can be used with simple one-line tests:
+bool TestMoreThings => Expect(Foo).ToEqual("Bar");
+
+// Or define full methods (Note: using a class is optional)
+void MyTest() {
+  Expect(TheAnswer).ToEqual(42);
+}
+
+// Support for setup and teardown functionality
+void SetUp() { /* do something */ }
+void TearDown() { /* do something */ }
+
+// Tests may also be grouped within a class
+class MyTests {
+  bool PassingTest => true;
+
+  // Or even grouped within a method
+  static void Group() {
+    bool LocalTestFunction() => Expect("This Syntax").To.Work.OK;
+  }
+}
 ```

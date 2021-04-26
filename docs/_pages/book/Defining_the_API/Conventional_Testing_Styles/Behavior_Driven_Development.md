@@ -21,10 +21,10 @@ BDD-style syntax typically...
 
 ```cs
 Dog dog;
-describe("Dog", () => {
-  before() { dog = new Dog(); }
-  it("can bark", () => {
-    expect(dog.Bark()).toEqual("Woof!");
+Describe("Dog", () => {
+  Before(() => { dog = new Dog(); });
+  It("can bark", () => {
+    Expect(dog.Bark()).ToEqual("Woof!");
   });
 });
 ```
