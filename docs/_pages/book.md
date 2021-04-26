@@ -1,8 +1,22 @@
-\frontmatter
+---
+permalink: /book
+title: "👓 Book"
+layout: singleWithoutTitle
+author_profile: true
+show_links: true
+# sidebar:
+#   nav: BookParts
+show_download_button: true
+always_show_sidebar: true
+class: docs
+---
+
+
 
 # Introduction
 
-\mainmatter
+
+
 
 # Defining the API
 
@@ -16,14 +30,14 @@ Developers who have experience authoring tests will likely have used one or more
 
 There are different schools of thought on what tests should _look like_.
 
-### xUnit, Behavior-Driven Development (BDD), Gherkin
+#### xUnit, Behavior-Driven Development (BDD), Gherkin
 
 The most common testing _syntax styles_ are: [xUnit][], [Behavior-Driven Development][BDD], and [Gherkin][].
 
 > Note: Behavior-Driven Development is a software _process_, not a code syntax.  
 > However, similar _syntax styles_ have emerged over the years for these different testing paradigms.
 
-#### xUnit
+### xUnit
 
 xUnit-style syntax typically...
 
@@ -41,7 +55,7 @@ class DogTests {
 }
 ```
 
-#### Behavior-Driven Development
+### Behavior-Driven Development
 
 BDD-style syntax typically...
 
@@ -59,7 +73,7 @@ describe("Dog", () => {
 });
 ```
 
-#### Gherkin (aka Cucumber)
+### Gherkin (aka Cucumber)
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language):
 
@@ -69,6 +83,8 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_langu
 
 Gherkin is another BDD testing syntax which places an emphasis on using natural language.
 
+Rather than defining tests in programming code, Gherkin uses a plain text syntax:
+
 ```gherkin
 Feature: Dog
   Scenario: Barking
@@ -77,9 +93,7 @@ Feature: Dog
     Then the output should be "Woof!"
 ```
 
-Rather than defining tests in programming code, Gherkin uses a plain text syntax.
-
-Testing libraries for Gherkin allow you to write an interpreter for your Gherkin code.
+Testing libraries for Gherkin allow you to write an interpreter for your Gherkin code:
 
 ```cs
 [Then("the output should be \"(.*)\"")]
@@ -98,38 +112,39 @@ In this book, we will be implementing:
 
 - xUnit syntax where each test is represented by a C# method and uses assertions
 - BDD syntax where each test is defined using a lambda and uses expectations
-- We will embrace the top-level method support in C# 9 *
+- We will embrace the [top-level statement support][TLS] in C# 9 ( _just for fun!_ )
 
-> \* C# only supports _one file_ with top-level statements. Not very practical for us.  
-> But we'll support this syntax for single-file test suites (_simply because it's neat_)
-
-### Why Multiple Syntaxes?
+#### Why Multiple Syntaxes?
 
 Let's make it flexible so that users can pick and choose! It's fun. Design goals below:
 
 ### xUnit Syntax
 
 ```cs
+using static MiniSpec.Assert;
+
 void SetUp() { /* do something */ }
 void TearDown() { /* do something */ }
-
 void TestSomething() {
-  MiniSpec.Assert.Equals(42, Answer);
+  AssertEquals(42, TheAnswer);
 }
+bool TestAnotherThing => 1 == 2;
 ```
 
 ### BDD Syntax
 
 ```cs
-MiniSpec.Describe((spec) => {
-  spec.before(() => { /* do something */ });
-  spec.after(() => { /* do something */ });
+using static MiniSpec.Expect;
 
-  spec.it("does something", () => {
-    MiniSpec.Expect(Answer).ToEqual(42);
+MiniSpec.Describe((spec) => {
+  spec.Before(() => { /* do something */ });
+  spec.After(() => { /* do something */ });
+  spec.It("does something", () => {
+    Expect(TheAnswer).ToEqual(42);
   });
 });
 ```
+
 
 # Test-Driven Test Development
 
@@ -218,7 +233,7 @@ We'll create a test which:
 
 > What is `minispec.exe`? It doesn't exist yet, but that's the program we'll make to run tests!
 
-\pagebreak
+
 
 Rename `UnitTest1.cs` to `IntegrationTest.cs` and replace its content with the following:
 
@@ -260,7 +275,7 @@ public class IntegrationTest {
 }
 ```
 
-\pagebreak
+
 
 #### Review
 
@@ -345,7 +360,7 @@ dotnet add reference ../MiniSpec
 dotnet add reference ../MyTests
 ```
 
-Now run the tests with `dotnet test` (_except below_)
+Now run the tests with `dotnet test` (_excerpt below_)
 
 ```
 IntegrationTest.ExpectedSpecsPassAndFail [FAIL]
@@ -411,28 +426,263 @@ Wonderful. Ok. Our program runs. It gets a list of DLLs. Now let's run the tests
 
 Our `minispec.exe` program is currently seeing a list of paths to DLL files.
 
-Our current example DLL test file is defined as an application with 2 top-level methods:
-
-- `TestShouldPass()`
-- `TestShouldFail()`
-
-Let's load up the DLL assembly and invoke those methods!
+Let's load the provided DLLs and find our defined test methods inside of them!
 
 #### Get List of Methods in DLL
 
-First, let's just see the test print out a list of the methods that we're looking for!
+First, let's update the test to _print out a list of methods_ from the provided DLL.
 
 Update `MiniSpec/Program.cs` to the following:
 
 ```cs
-...
+using System;
+using System.Reflection;
+using System.Runtime.Loader;
+
+foreach (var dll in args) {
+    Console.WriteLine($"Loading {dll}");
+    var dllPath = System.IO.Path.GetFullPath(dll);
+    var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(dllPath);
+
+    foreach (var type in assembly.GetTypes()) {
+        Console.WriteLine($"Found type: {type}");
+        foreach (var method in type.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))
+            Console.WriteLine($"Instance Method: {method.Name}");
+        foreach (var method in type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static))
+            Console.WriteLine($"Static Method: {method.Name}");
+    }
+}
 ```
+
+##### Review
+
+- Load any argument as a .NET DLL assembly
+- Loop over every defined type in the assembly (_`args` is available to top-level statements_)
+- Loop over every instance method on the type (_and print out the method name_)
+- Loop over every static method on the type (_and print out the method name_)
+
+
+
+Run the tests again with `dotnet test` (_excerpt below_)
+
+```
+Not found: PASS TestShouldPass
+In value:  Loading MyTests.dll
+Found type: <Program>$
+Instance Method: MemberwiseClone
+Instance Method: Finalize
+Static Method: <Main>$
+Static Method: <<Main>$>g__TestShouldPass|0_0
+Static Method: <<Main>$>g__TestShouldFail|0_1
+```
+
+The test is still failing (_"Not found: PASS TestShouldPass"_) but we can see new output, which is good!
+
+Even though we did not _explicitly_ define it, C# 9 added a `<Program>` class for us.
+
+As you would expect from a console application, this class has a static `<Main>` method.
+
+And it looks like we found the test methods which we defined as top-level statements too!
+
+> Huh. `<<Main>$>g__TestShouldPass|0_0`. I guess _that's_ how local methods are represented.
+
+#### What Now?
+
+Well, remember our goal? _"do whatever we need to do to make the test pass"_
+
+Let's be naive and simply run every static method we find with `Test` in the name.
+
+Update `MiniSpec/Program.cs` to the following:
+
+```cs
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Loader;
+
+foreach (var dll in args) {
+    var dllPath = System.IO.Path.GetFullPath(dll);
+    var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(dllPath);
+    foreach (var type in assembly.GetTypes()) {
+        var testMethods = type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
+            .Where(m => m.Name.Contains("Test"));
+        foreach (var method in testMethods) {
+            try {
+                method.Invoke(null, null);
+                Console.WriteLine($"PASS {method.Name}");
+            } catch (Exception e) {
+                Console.WriteLine($"FAIL {method.Name}");
+                Console.WriteLine($"ERROR {e.Message}");
+            }
+        }
+    }
+}
+```
+
+Run the tests again with `dotnet test` (_excerpt below_)
+
+```
+Not found: PASS TestShouldPass
+In value:  PASS <<Main>$>g__TestShouldPass|0_0
+FAIL <<Main>$>g__TestShouldFail|0_1
+ERROR Exception has been thrown by the target of an invocation.
+```
+
+Yikes, we tried but a few things are incorrect which we need to fix.
+
+- Name of the test is showing up as `<<Main>$>g__TestShouldPass|0_0`
+- ^--- this should be: `TestShouldPass`
+- Exception message only says _Exception has been thrown by the target of an invocation_
+- ^--- this should be `Kaboom!`
+
+#### Fix `Program.cs`
+
+Update `MiniSpec/Program.cs` to the following:
+
+```cs
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Loader;
+using System.Text.RegularExpressions;
+
+foreach (var dll in args) {
+    var dllPath = System.IO.Path.GetFullPath(dll);
+    var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(dllPath);
+    foreach (var type in assembly.GetTypes()) {
+        var testMethods = type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
+            .Where(m => m.Name.Contains("Test"));
+        foreach (var method in testMethods) {
+            var displayName = method.Name;
+            if (Regex.IsMatch(displayName, @"[^\w]"))
+                displayName =
+                    Regex.Match(displayName, @"Test([\w]+)").Value;
+            try {
+                method.Invoke(null, null);
+                Console.WriteLine($"PASS {displayName}");
+            } catch (Exception e) {
+                Console.WriteLine($"FAIL {displayName}");
+                Console.WriteLine($"ERROR {e.InnerException.Message}");
+            }
+        }
+    }
+}
+```
+
+Run the tests again with `dotnet test` (_excerpt below_)
+
+```
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1
+```
+
+*Phew!* We did it! Green, passing tests! Goodness gracious! Hooray!
+
+Try it yourself!
+
+```
+bin/Debug/*/minispec.exe bin/Debug/*/MyTests.dll
+PASS TestShouldPass
+FAIL TestShouldFail
+ERROR Kaboom!
+```
+
+> On Linux: `./bin/Debug/*/minispec bin/Debug/*/MyTests.dll`
 
 ## Red, Green, Refactor
 
+If you wrote code different from what we have at home, _now is the time to Refactor!_
+
+As the author, I am doing BDD (Book-Driven Development) and refactoring as I go.
+
+At home, _it is really important not to forget the Refactor step!_
+
+In the next section, we'll come up with a list of features to implement and walk thru them.
+
+
+# Planning Phase
+
+We've created a working prototype. Now we need to decide what to make next!
+
+## Brainstorm Features
+
+What do we want our wonderful new test framework to provide?
+
+> This is _my personal braindump of ideas_ - come up with your own ideas at home!
+
+#### Command-Line Interface
+
+- `[ ]` `minispec --version` - _Print out the current version of minispec_
+- `[ ]` `minispec -l/--list` - _Print out test names instead of running them_
+- `[ ]` `minispec -f/--filter [Test Name Matcher]` - _Run a subset of the tests_
+- `[ ]` `minispec -v/--verbose` - _Print output from every test, even passing ones_
+- `[ ]` `minispec -q/--quiet` - _Don't print anything, exit 0 on success or exit 1 on failure_
+- `[ ]` `minispec` should always exit `0` on success or non-zero on failure
+- `[ ]` Output should show pretty colors
+
+#### Syntax DSL ([Domain-Specific Language][DSL])
+
+- `[ ]` Support running instance methods
+- `[ ]` Support DLLS which need to load dependencies
+- `[ ]` Support DLLS which have conflicting dependencies
+
+#### xUnit Test Syntax DSL
+
+- `[ ]` Support failing if a Test method with a bool return type returns `false`
+- `[ ]` Detect and run `SetUp` and `TearDown` methods before and after _each run_ of a test case
+- `[ ]` Provide an attribute, e.g. `MiniSpec.TestData`, to support [parameterized tests][DDT] (DDT)
+
+#### BDD Test Syntax DSL
+
+- `[ ]` Support defining and running tests via `spec.It`
+- `[ ]` Support defining `Before` and `After` actions and run them before _each run_ of a test case
+- `[ ]` Provide a way of defining parameterized tests, e.g. `spec.WithInputs`
+
+#### Assertions & Expectations
+
+- `[ ]` Should work fine with `xUnit` assertions
+- `[ ]` Should work fine with `NUnit` assertions
+- `[ ]` Should work fine with `FluentAssertions`
+- `[ ]` `using MiniSpec` - `Expect.That(TheAnswer).Equals(42)`
+- `[ ]` `using static MiniSpec.Expect` - `Expect(TheAnswer).ToEqual(42)`
+- `[ ]` `using MiniSpec` - `Assert.That(TheAnswer).Equals(42)`
+- `[ ]` `using static MiniSpec.Assert` - `AssertEqual(42, TheAnswer)`
+- `[ ]` Extensibility so it's easy to add comparisons (to both `Assert` and `Expect`)
+- `[ ]` Assertion/Expectation for `.Contains`
+- `[ ]` Assertion/Expectation for `.Fails` to assert blocks of code throw Exceptions
+
+#### Distribution
+
+- `[ ]` Make available via [MyGet][MyGet]
+- `[ ]` Make available via [NuGet][NuGet]
+
+## Choose Feature to Implement
+
+Looking at the list, as it is now, it looks pretty daunting.
+
+For the next parts of this book, you'll be able to hop around and implement
+whichever set of these features that you'd like to
+(_although some may depend on completing other sections first_).
+
+My recommendation to you is to start by choosing one of these options:
+
+- Something which will make you **_happy_**
+- Something which is **_easy_** to get done
+- Something which provides the most **_value_**
+
+Make _sure_ that you _test-drive_ (_and don't forget the Refactor step!_).
+
+**Have fun!**
+
+# Choose Your Own Adventure
 
 
 [xUnit]: https://en.wikipedia.org/wiki/XUnit
 [BDD]: https://en.wikipedia.org/wiki/Behavior-driven_development
 [Gherkin]: https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language
 [TDD]: https://en.wikipedia.org/wiki/Test-driven_development
+[DSL]: https://en.wikipedia.org/wiki/Domain-specific_language
+[DDT]: https://en.wikipedia.org/wiki/Data-driven_testing
+[TLS]: https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#top-level-statements
+[MyGet]: https://www.myget.org
+[NuGet]: https://www.nuget.org
+

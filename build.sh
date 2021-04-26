@@ -3,6 +3,8 @@
 # sudo apt install pandoc ttf-dejavu-extra librsvg2-bin texlive-full
 
 source=book
+
+# TODO move full source to temp file
 fullSource=book/FullSource.md
 
 if [ "$1" = clean ]
@@ -21,7 +23,7 @@ pandocTemplateDir="$HOME/.pandoc/templates"
 pandocTemplateFile="$HOME/.pandoc/templates/$latexTemplate.latex"
 
 websiteFileHeader=templates/web/contentHeader.md
-websiteSourceFile=docs/_pages/docs.md
+websiteSourceFile=docs/_pages/book.md
 
 if [ "$1" = --full ]
 then
@@ -38,7 +40,22 @@ else
   pandocLatexFile=templates/pdf/$latexTemplate-cover-text.latex
 fi
 
-echo "Compiling website"
+echo "Compiling Website"
+cp $websiteFileHeader $websiteSourceFile
+echo >> $websiteSourceFile
+for chapter in $source/*
+do
+  [[ "$chapter" = *FullSource* ]] && continue
+  [ -f "$chapter" ] || continue
+  echo "$chapter --> $websiteSourceFile"
+  cat "$chapter" | sed 's|\\frontmatter||g' | sed 's|\\mainmatter||g' | sed 's|\\pagebreak||g' >> $websiteSourceFile
+  echo >> $websiteSourceFile
+  echo >> $websiteSourceFile
+done
+
+[ "$1" = web ] && (( $# == 1 )) && exit 0
+
+echo "Compiling PDF source"
 cat $header > $fullSource
 echo >> $fullSource
 for chapter in $source/*
@@ -50,12 +67,6 @@ do
   echo >> $fullSource
   echo >> $fullSource
 done
-
-cp $websiteFileHeader $websiteSourceFile
-echo >> $websiteSourceFile
-cat $fullSource | sed 's|\\frontmatter||g' | sed 's|\\mainmatter||g' | sed 's|\\pagebreak||g' >> $websiteSourceFile
-
-[ "$1" = web ] && (( $# == 1 )) && exit 0
 
 mkdir -p "$pandocTemplateDir"
 echo "Updating $pandocLatexFile --> $pandocTemplateFile"

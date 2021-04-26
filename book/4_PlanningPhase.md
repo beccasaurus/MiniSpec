@@ -17,7 +17,6 @@ What do we want our wonderful new test framework to provide?
 - `[ ]` `minispec -q/--quiet` - _Don't print anything, exit 0 on success or exit 1 on failure_
 - `[ ]` `minispec` should always exit `0` on success or non-zero on failure
 - `[ ]` Output should show pretty colors
-- `[ ]` `minispec -r/--random` for running tests in a random order
 
 #### Syntax DSL ([Domain-Specific Language][DSL])
 
@@ -28,15 +27,13 @@ What do we want our wonderful new test framework to provide?
 #### xUnit Test Syntax DSL
 
 - `[ ]` Support failing if a Test method with a bool return type returns `false`
-- `[ ]` Detect and run `SetUp` methods before _each run_ of a test case
-- `[ ]` Detect and run `TearDown` methods after _each run_ of a test case (_even if it fails_)
+- `[ ]` Detect and run `SetUp` and `TearDown` methods before and after _each run_ of a test case
 - `[ ]` Provide an attribute, e.g. `MiniSpec.TestData`, to support [parameterized tests][DDT] (DDT)
 
 #### BDD Test Syntax DSL
 
 - `[ ]` Support defining and running tests via `spec.It`
-- `[ ]` Support defining `spec.Before` action and run it before _each run_ of a test case
-- `[ ]` Support defining `spec.After` action and run it after _each run_ of a test case
+- `[ ]` Support defining `Before` and `After` actions and run them before _each run_ of a test case
 - `[ ]` Provide a way of defining parameterized tests, e.g. `spec.WithInputs`
 
 #### Assertions & Expectations
@@ -51,6 +48,11 @@ What do we want our wonderful new test framework to provide?
 - `[ ]` Extensibility so it's easy to add comparisons (to both `Assert` and `Expect`)
 - `[ ]` Assertion/Expectation for `.Contains`
 - `[ ]` Assertion/Expectation for `.Fails` to assert blocks of code throw Exceptions
+
+#### Distribution
+
+- `[ ]` Make available via [MyGet][MyGet]
+- `[ ]` Make available via [NuGet][NuGet]
 
 ## Choose Feature to Implement
 

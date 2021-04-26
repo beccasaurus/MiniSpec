@@ -5,3 +5,5 @@
 [DSL]: https://en.wikipedia.org/wiki/Domain-specific_language
 [DDT]: https://en.wikipedia.org/wiki/Data-driven_testing
 [TLS]: https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9#top-level-statements
+[MyGet]: https://www.myget.org
+[NuGet]: https://www.nuget.org

@@ -1,5 +1,5 @@
 ---
-permalink: /docs
+permalink: /book
 title: "👓 Book"
 layout: singleWithoutTitle
 author_profile: true
