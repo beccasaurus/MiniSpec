@@ -1,6 +1,5 @@
 ---
-title: "MiniSpec"
-subtitle: "How-to Author a Testing Framework in .NET"
+title: "How-to Author a Testing Framework in .NET"
 author: ["Rebecca Taylor"]
 section-titles: false
 book: true

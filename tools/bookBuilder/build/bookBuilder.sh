@@ -45,7 +45,7 @@ local -r WEB_NAVIGATION_TITLE_TEMPLATE_FILE="$WEB_NAVIGATION_TEMPLATES_DIR/title
 local -r WEB_NAVIGATION_ITEM_TEMPLATE_FILE="$WEB_NAVIGATION_TEMPLATES_DIR/item.yml"
 
 local -r PDF_OUTPUT_FILE="$WEBSITE_DIR/HowToAuthorATestingFramework_byRebeccaTaylor.pdf"
-local -r PDF_FULL_SOURCE_FILE="$FULL_SOURCE_DIR/FullSourcePDF.md"
+local -r PDF_FULL_SOURCE_FILE="$FULL_SOURCE_DIR/FullSource_PDF.md"
 local -r PDF_TEMPLATES_DIR="$TEMPLATE_DIR/pdf"
 local -r PDF_LATEX_TEMPLATE_NAME="eisvogel"
 local -r PDF_LATEX_COVER_IMAGE_TEMPLATE_FILE="$PDF_TEMPLATES_DIR/$PDF_LATEX_TEMPLATE_NAME-cover-image.latex"
@@ -54,6 +54,12 @@ local -r PDF_LATEX_PREAMBLE_FILE="$PDF_TEMPLATES_DIR/preamble.latex"
 local -r PDF_PANDOC_TEMPLATE_DIRECTORY="$HOME/.pandoc/templates"
 local -r PDF_FULL_SOURCE_HEADER_FILE="$PDF_TEMPLATES_DIR/FullSourceHeader.md"
 local -r PDF_FULL_SOURCE_HEADER_NO_FRONTBACK_FILE="$PDF_TEMPLATES_DIR/FullSourceHeaderNoFrontBack.md"
+
+local -r EPUB_OUTPUT_FILE="$WEBSITE_DIR/HowToAuthorATestingFramework_byRebeccaTaylor.epub"
+local -r EPUB_FULL_SOURCE_FILE="$FULL_SOURCE_DIR/FullSource_ePub.md"
+local -r EPUB_TEMPLATES_DIR="$TEMPLATE_DIR/epub"
+local -r EPUB_FULL_SOURCE_HEADER_FILE="$EPUB_TEMPLATES_DIR/header.md"
+local -r EPUB_CSS_FILE="$EPUB_TEMPLATES_DIR/epub.css"
 
 # Common Locals (cannot be changed by child functions but are inherited)
 local -i part chapter section subSection smallSection minorSection
@@ -75,7 +81,26 @@ local partTitle chapterTitle sectionTitle subSectionTitle smallSectionTitle mino
       case "$__bookBuilder__mainCliCommands_command2" in
         "generate")
         ## @command bookBuilder epub generate
-          :
+          
+          bookBuilder log bold green "Generating ePub"
+          
+          cp "$EPUB_FULL_SOURCE_HEADER_FILE" "$EPUB_FULL_SOURCE_FILE"
+          echo >> "$EPUB_FULL_SOURCE_FILE"
+          cat "$FULL_SOURCE_FILE" >> "$EPUB_FULL_SOURCE_FILE"
+          
+          pandoc                                    \
+            --css "$EPUB_CSS_FILE"                  \
+            --toc                                   \
+            --toc-depth=3                           \
+            --listings                              \
+            --top-level-division=chapter            \
+            --highlight-style pygments              \
+            -H "$PDF_LATEX_PREAMBLE_FILE"           \
+            -V classoption=oneside                  \
+            -V linkcolor:blue                       \
+            -f markdown+raw_tex                     \
+            -o "$EPUB_OUTPUT_FILE"                   \
+            "$EPUB_FULL_SOURCE_FILE"
         ## @
   
             ;;
