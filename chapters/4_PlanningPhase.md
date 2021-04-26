@@ -14,18 +14,18 @@ What do we want our wonderful new test framework to provide?
 - `[ ]` `minispec` should always exit `0` on success or non-zero on failure
 - `[ ]` `minispec --version` - _Print out the current version of minispec_
 - `[ ]` `minispec -l/--list` - _Print out test names instead of running them_
-- `[ ]` `minispec -f/--filter [Test Name Matcher]` - _Run a subset of the tests_
+- `[ ]` `minispec -m/--match [Test Name Matcher]` - _Run a subset of the tests_
 - `[ ]` `minispec -v/--verbose` - _Print output from every test, even passing ones_
 - `[ ]` `minispec -q/--quiet` - _Don't print anything, exit 0 on success or exit 1 on failure_
 - `[ ]` `minispec -n/--no-local` - _Don't consider local functions when searching for tests_
 - `[ ]` `minispec -p/--pattern` - _Provide a custom pattern used to find test methods_
 - `[ ]` `minispec -s/--setup` - _Provide a custom pattern used to find setup methods_
 - `[ ]` `minispec -t/--teardown` - _Provide a custom pattern used to find teardown methods_
+- `[ ]` `minispec -f/--formatter` - _Name of output reporter formatter to use, e.g. TAP_
 
 #### Syntax DSL ([Domain-Specific Language][DSL])
 
-- `[ ]` Support DLLS which need to load dependencies
-- `[ ]` Support DLLS which have conflicting dependencies
+- `[ ]` Support DLLS which need to load dependencies, including if there are conflicts
 - `[ ]` Support failing if a Test method with a bool return type returns `false`
 - `[ ]` Support running instance methods
 - `[ ]` Invoke parent method(s) before invoking test function (_if local function_)
