@@ -34,20 +34,19 @@ _Mini Testing Framework for .NET_
 ### MiniSpec Syntax
 
 ```cs
-// MyTest.cs (no using statement required)
-//           (supports C# 9 top-level statements)
-
 var dog = new Dog();
 
-bool TestDogCanBark() => dog.bark() == "Woof!";
+bool TestBark() => dog.Bark() == "Woof!";
 ```
 
+<h3 style="clear: left;">Expect Syntax</h3>
+
 ```cs
-using static MiniSpec.Expect; // Optional
+using static MiniSpec.Expect;
 
 var dog = new Dog();
 
-bool TestDogCanBark() {
+bool TestBark() {
   Expect(dog.bark()).ToEqual("Woof!");
 }
 ```

@@ -12,23 +12,36 @@ _Currently just using this as a fun C# refresher project!_
 
 ## MiniSpec Syntax
 
+> Note: No `using` statements required.
+>
+> You don't even need to add a reference to MiniSpec.
+>
+> This is a complete file (_thanks to C# 9 top-level statements_)
+
 ```cs
-using static MiniSpec.Expect; // Optional assertion library
+var dog = new Dog();
 
-bool TestShouldPass => true;
-bool TestShouldFail => false;
+void TearDown() => { dog.Delete(); }
 
-void DogTests() {
-  var dog = new Dog();
+bool DogCanBark => dog.Bark() == "Woof!";
+```
 
-  bool ItCanBark => dog.Bark() == "Woof!"
-  bool ItCanEatTreats() {
-    var treat = new Treat();
-    dog.Eat(treat);
-    Expect(treat.Status).ToEqual("Nommed");
-  }
+## Expect Syntax
+
+> Completely Optional.
+>
+> You can use simple booleans, custom Exceptions,  
+> or existing xUnit, NUnit, or FluentAssertions (et al.)
+
+```cs
+using static MiniSpec.Expect;
+
+bool DogCanBark() {
+  Expect(dog.Bark()).ToEqual("Woof!");
 }
 ```
+
+Read the [tutorial book](https://minispec.io/Introduction) or the [Usage Documentation](https://minispec.io/docs) to learn more!
 
 ## MiniSpec Tutorial Book
 
