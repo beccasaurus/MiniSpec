@@ -6,7 +6,9 @@
 
 ## Episode 3: ✅ Make the Spec Pass! 
 
-## Episode 4: ???
+## Episode 4: ??? _Make something fail_ ???
+
+## Episode 5: ??? _Make something pass_ ???
 
 ---
 
