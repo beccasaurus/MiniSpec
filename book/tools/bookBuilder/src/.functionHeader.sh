@@ -4,11 +4,11 @@ local -r AUTHOR="Rebecca Taylor"
 local -r NEWLINE=$'\n'
 local -r HR="${NEWLINE}${NEWLINE}---${NEWLINE}${NEWLINE}"
 
-local -r SOURCE_DIR=chapters
-local -r TEMPLATE_DIR=templates
+local -r SOURCE_DIR=book/chapters
+local -r TEMPLATE_DIR=book/templates
 local -r WEBSITE_DIR=docs
 
-local -r FULL_SOURCE_DIR=source
+local -r FULL_SOURCE_DIR=book/source
 local -r FULL_SOURCE_FILE="$FULL_SOURCE_DIR/FullSource.md"
 local -r FULL_SOURCE_METADATA_FILE="$FULL_SOURCE_DIR/metadata.sh"
 
