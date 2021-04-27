@@ -3,6 +3,8 @@ main:
     url: "/docs"
   - title: '<i class="fad fa-glasses-alt"></i> Read Book'
     url: "/Introduction"
+  - title: '<i class="fad fa-video"></i> Screencasts'
+    url: "/"
   - title: '<i class="fad fa-file-pdf"></i> PDF'
     url: "/MiniSpec_HowToAuthorATestingFramework_byRebeccaTaylor.pdf"
   - title: '<i class="fad fa-tablet-alt"></i> ePub'
