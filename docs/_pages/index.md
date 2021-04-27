@@ -18,10 +18,9 @@ _Mini Testing Framework for .NET_
 
 ---
 
-<i class="fad fa-terminal"></i> `dotnet add package MiniSpec.Expect`  
-<i class="fad fa-terminal"></i> `dotnet tool install MiniSpec.Console`
+<i class="fad fa-terminal"></i> `dotnet tool install MiniSpec (Pending)`
 
-**MiniSpec** is _both_ a mini **test framework** _and_ a mini **book** on how it was authored!
+**MiniSpec** <strike>is</strike> <u>will be</u> _both_ a mini **test framework** _and_ a mini **book** on how it was authored!
 
 ### Why?
 
@@ -30,30 +29,3 @@ _Mini Testing Framework for .NET_
 
 > Please do not author your own testing framework unless there's a good reason.  
 > This is meant to be a fun learning exercise, use conventional tools instead.
-
-### MiniSpec Syntax
-
-```cs
-var dog = new Dog();
-
-bool TestBark() => dog.Bark() == "Woof!";
-```
-
-<h3 style="clear: left;">Expect Syntax</h3>
-
-```cs
-using static MiniSpec.Expect;
-
-var dog = new Dog();
-
-bool TestBark() {
-  Expect(dog.bark()).ToEqual("Woof!");
-}
-```
-
-<hr style="clear: left;" />
-
-[BDD]: https://en.wikipedia.org/wiki/Behavior-driven_development
-[xUnit]: https://en.wikipedia.org/wiki/XUnit
-
-[<i class="fad fa-book-open"></i> Read the Documentation](/docs) to learn more.

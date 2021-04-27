@@ -630,15 +630,14 @@ What do we want our wonderful new test framework to provide?
 - `[ ]` Allow for some local functions within a test function _not_ to be run (_use `_` prefix_)
 - `[ ]` Detect and run `SetUp` and `TearDown` methods before and after _each run_ of a test case
 - `[ ]` Determine and implement a nice way of supporting [parameterized tests][DDT] (DDT)
+- `[ ]` Let `dotnet run` run the tests if you invoke `MiniSpec.Run()`
 
 [DSL]: https://en.wikipedia.org/wiki/Domain-specific_language
 [DDT]: https://en.wikipedia.org/wiki/Data-driven_testing
 
 #### Assertions & Expectations
 
-- `[ ]` Should work fine with `xUnit` assertions
-- `[ ]` Should work fine with `NUnit` assertions
-- `[ ]` Should work fine with `FluentAssertions`
+- `[ ]` Should work fine with `xUnit` and `NUnit` and `FluentAssertions` assertions
 - `[ ]` Extensibility so it's easy to add your own `Expect()` assertions
 - `[ ]` `Expect().ToEqual`
 - `[ ]` `Expect().ToContain`
