@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "minispec.console": {
+      "version": "1.0.0",
+      "commands": [
+        "minispec"
+      ]
+    }
+  }
+}

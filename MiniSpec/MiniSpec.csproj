@@ -1,9 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <AssemblyName>minispec</AssemblyName>
-    <TargetFrameworks>net472;net50;netcoreapp3.1;netcoreapp3.0;</TargetFrameworks>
+    <PackageId>MiniSpec</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Rebecca Taylor</Authors>
+    <Company>Rebecca Taylor</Company>
+    <TargetFrameworks>net20;net50</TargetFrameworks>
+    <!-- <TargetFrameworks>netstandard1.6;net35;net20</TargetFrameworks> -->
+    <!-- <TargetFrameworks>net50;net48;netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;netstandard1.0;netstandard1.1;netstandard1.2;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;netstandard2.1</TargetFrameworks> -->
+    <PackageOutputPath Condition=" '$(NUGET_PACKAGES)' != '' ">$(NUGET_PACKAGES)</PackageOutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net35'">$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
+    <AutomaticallyUseReferenceAssemblyPackages Condition=" '$(TargetFramework)' == 'net35' ">false</AutomaticallyUseReferenceAssemblyPackages>
   </PropertyGroup>
 
 </Project>
