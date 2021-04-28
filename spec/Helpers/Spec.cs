@@ -26,7 +26,7 @@ public class Spec {
 
     [TearDown]
     public void TearDown() {
-        if (TemporaryDirectoryExists) Directory.Delete(TemporaryDirectory);
+        if (TemporaryDirectoryExists) Directory.Delete(TemporaryDirectory, recursive: true);
     }
     
     public Project CreateProject(string name = null, int csharp = 9, Project.TargetFrameworks framework = Project.TargetFrameworks.Net50, Project.OutputTypes type = Project.OutputTypes.Library) {

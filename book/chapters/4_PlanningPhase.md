@@ -22,6 +22,8 @@ What do we want our wonderful new test framework to provide?
 - `[ ]` `minispec -s/--setup` - _Provide a custom pattern used to find setup methods_
 - `[ ]` `minispec -t/--teardown` - _Provide a custom pattern used to find teardown methods_
 - `[ ]` `minispec -f/--formatter` - _Name of output reporter formatter to use, e.g. TAP_
+- `[ ]` `minispec -d/--dll` - _Provide a custom pattern used to auto-find DLLs_
+- `[ ]` `minispec -c/--config` - _Provide a text configuration file (default `.minispec`)_
 
 #### Syntax DSL ([Domain-Specific Language][DSL])
 

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <AssemblyName>minispec</AssemblyName>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net472;net50;netcoreapp3.1;netcoreapp3.0;</TargetFrameworks>
   </PropertyGroup>
 
 </Project>
