@@ -9,20 +9,36 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         dotnet-version: ['5.0.x' ]
 
     steps:
+    - name: Install Mono
+      run: apt update && apt install mono-devel
     - uses: actions/checkout@v2
     - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
       uses: actions/setup-dotnet@v1.7.2
       with:
         dotnet-version: ${{ matrix.dotnet-version }}
+    - name: Setup default NUGET_PACKAGES
+      run: mkdir /tmp/globalPackagesFolder/
+      shell: bash
+    - name: Build MiniSpec
+      run: dotnet build --configuration Release --no-restore
+      working-directory: MiniSpec
+      env:
+        NUGET_PACKAGES: /tmp/globalPackagesFolder/
     - name: Install dependencies
       run: dotnet restore
+      env:
+        NUGET_PACKAGES: /tmp/globalPackagesFolder/
     - name: Build
       run: dotnet build --configuration Release --no-restore
+      env:
+        NUGET_PACKAGES: /tmp/globalPackagesFolder/
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+      env:
+        NUGET_PACKAGES: /tmp/globalPackagesFolder/
