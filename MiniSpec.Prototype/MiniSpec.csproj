@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <AssemblyName>minispec</AssemblyName>
-    <TargetFrameworks>net472;net50;netcoreapp3.1;netcoreapp3.0;</TargetFrameworks>
-  </PropertyGroup>
-
-</Project>
