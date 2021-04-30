@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Install Mono
-      run: apt update && apt install mono-devel
+      run: sudo apt update && sudo apt install mono-devel
     - uses: actions/checkout@v2
     - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
       uses: actions/setup-dotnet@v1.7.2
