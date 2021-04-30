@@ -29,7 +29,7 @@ public class Spec {
         if (TemporaryDirectoryExists) Directory.Delete(TemporaryDirectory, recursive: true);
     }
     
-    public Project CreateProject(string name = null, int csharp = 9, Project.TargetFrameworks framework = Project.TargetFrameworks.Net50, Project.OutputTypes type = Project.OutputTypes.Library) {
+    public Project CreateProject(string name = null, int csharp = 0, Project.TargetFrameworks framework = Project.TargetFrameworks.Net50, Project.OutputTypes type = Project.OutputTypes.Library) {
         if (name is null) name = Guid.NewGuid().ToString();
         var projectPath = Path.Combine(TemporaryDirectory, name);
         var project = new Project(projectDirectory: projectPath, csharpVersion: csharp, targetFramework: framework, outputType: type);

@@ -5,10 +5,12 @@ using System.Collections.Generic;
 public class Project {
 
     public enum OutputTypes { Library, Exe }
-    public enum TargetFrameworks { Net50, Core21, Core31, Standard20, Standard21 }
+    public enum TargetFrameworks { Net50, Net48, Net20, Core21, Core31, Standard20, Standard21 }
 
     public Dictionary<TargetFrameworks,string> TargetFrameworkNames = new() {
         { TargetFrameworks.Net50, "net50" },
+        { TargetFrameworks.Net48, "net48" },
+        { TargetFrameworks.Net20, "net20" },
         { TargetFrameworks.Core21, "netcoreapp2.1" },
         { TargetFrameworks.Core31, "netcoreapp3.1" },
         { TargetFrameworks.Standard20, "netstandard2.0" },
@@ -80,13 +82,15 @@ public class Project {
   <PropertyGroup>
     <TargetFramework>{TargetFrameworkName}</TargetFramework>
     <OutputType>{OutputType}</OutputType>
-    <LangVersion>{CsharpVersion}</LangVersion>
+    {GetLangVersionText()}
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include=""MiniSpec"" Version=""1.0.0"" />
   </ItemGroup>
 </Project>
 ";
+
+    string GetLangVersionText() => CsharpVersion > 0 ? $"<LangVersion>{CsharpVersion}</LangVersion>" : "";
 
     string GetNuGetConfigText() {
         if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NUGET_PACKAGES")))
