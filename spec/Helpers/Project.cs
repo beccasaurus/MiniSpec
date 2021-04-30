@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Collections.Generic;
 
@@ -31,9 +32,8 @@ public class Project {
         _outputType = outputType;
     }
 
-    public void CreateProjectFile() {
-        WriteFile("Project.csproj", GetProjectFileText());
-    }
+    public void CreateProjectFile() { WriteFile("Project.csproj", GetProjectFileText()); }
+    public void CreateNuGetConfigFile() { WriteFile("nuget.config", GetNuGetConfigText()); }
 
     public void WriteFile(string relativePath, string content = "") {
         var fullPath = FilePath(relativePath);
@@ -49,17 +49,29 @@ public class Project {
             return Path.Combine(ProjectDirectory, relativePath.Replace("/", "\\"));
     }
 
-    public CommandResult RunCommand(string commandName, params string[] arguments) => Command.Run(commandName, ProjectDirectory, arguments);
+    public CommandResult RunCommand(string commandName, params string[] arguments) {
+        LastCommandResult = Command.Run(commandName, ProjectDirectory, arguments);
+        return LastCommandResult;
+    }
 
+    public CommandResult LastCommandResult { get; set; }
     public CommandResult BuildResult { get; set; }
     public CommandResult TestResult { get; set; }
+    public CommandResult RunResult { get; set; }
 
     public CommandResult Build() {
         BuildResult = RunCommand("dotnet", "build");
         return BuildResult;
     }
 
-    public CommandResult RunTests() {
+    public CommandResult Run(params string[] arguments) {
+        List<string> args = new() { "run" };
+        args.AddRange(arguments);
+        RunResult = RunCommand("dotnet", args.ToArray());
+        return RunResult;
+    }
+
+    public CommandResult Test() {
         TestResult = RunCommand("dotnet", "test");
         return TestResult;
     }
@@ -70,6 +82,21 @@ public class Project {
     <OutputType>{OutputType}</OutputType>
     <LangVersion>{CsharpVersion}</LangVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include=""MiniSpec"" Version=""1.0.0"" />
+  </ItemGroup>
 </Project>
 ";
+
+    string GetNuGetConfigText() {
+        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NUGET_PACKAGES")))
+            throw new Exception("Please set NUGET_PACKAGES to the path to a global package directory for MiniSpec tests");
+        return $@"<?xml version=""1.0"" encoding=""utf-8""?>
+<configuration>
+    <packageSources>
+        <add key=""GlobalPackages"" value=""{Environment.GetEnvironmentVariable("NUGET_PACKAGES")}"" />
+    </packageSources>
+</configuration>
+";
+    }
 }

@@ -34,6 +34,7 @@ public class Spec {
         var projectPath = Path.Combine(TemporaryDirectory, name);
         var project = new Project(projectDirectory: projectPath, csharpVersion: csharp, targetFramework: framework, outputType: type);
         project.CreateProjectFile();
+        project.CreateNuGetConfigFile();
         return project;
     }
 

@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Specs.xUnit {
@@ -8,18 +9,19 @@ namespace Specs.xUnit {
 
     [Test]
     public void TestSomething() {
-      var project = CreateProject(csharp: 2, framework: Project.TargetFrameworks.Net50);
-      project.WriteFile("MyFile.cs", "public class Testing { int? nullableInt; }");
-      project.Build();
+      var project = CreateProject(framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
+      project.WriteFile("Program.cs", @"MiniSpec.Tests.Run(System.Console.Out, System.Console.Error);");
+      project.Run();
 
-      Console.WriteLine($"PROJECT DIR: {project.ProjectDirectory}");
-      Console.WriteLine($"STDOUT: {project.BuildResult.StandardOutput}");
-      Console.WriteLine($"STDERR: {project.BuildResult.StandardError}");
-
-      Assert.True(project.BuildResult.OK);
+      project.RunResult.OK.Should().Equals(true);
+      project.RunResult.StandardOutput.Should().Contain("Hello, world!"); // <--- this means it ran MiniSpec.Tests.Run OK (for now)
     }
   }
 }
+
+
+      // var project = CreateProject(csharp: 2, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
+      // project.WriteFile("MyFile.cs", "public class Testing { int? nullableInt; }");
 
 //   public class InstanceMethods {
 //     public class PublicClass {
