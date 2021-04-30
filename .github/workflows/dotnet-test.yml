@@ -25,6 +25,10 @@ jobs:
     - name: Setup default NUGET_PACKAGES
       run: mkdir /tmp/globalPackagesFolder/
       shell: bash
+    - name: Install MiniSpec dependencies
+      run: dotnet restore
+      env:
+        NUGET_PACKAGES: /tmp/globalPackagesFolder/
     - name: Build MiniSpec
       run: dotnet build --configuration Release --no-restore
       working-directory: MiniSpec
