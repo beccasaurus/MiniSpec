@@ -21,31 +21,29 @@ namespace MiniSpec
       _reporter = testReporter;
     }
 
-    internal List<string> TEST_OBJECT_NAME_PATTERNS = new List<string> { "^[a-zA-Z].*Test", "^[a-zA-Z].*Spec", "^Test", "^Spec" };
-    internal List<string> TEST_OBJECT_CHILD_TEST_NAME_PATTERNS = new List<string> { "^[a-zA-Z]" };
+    internal List<string> TEST_OR_TEST_GROUP_NAME_PATTERNS = new List<string> { "^[A-Z].*Test", "^[A-Z].*Spec", "^Test", "^Spec" };
+    internal List<string> TEST_GROUP_CHILD_TEST_NAME_PATTERNS = new List<string> { "^[A-Z].*Test", "^[A-Z].*Spec", "^Test", "^Spec", "^It", "^Should", "^Can" };
 
     internal void FindAndExecutorTests()
     {
       foreach (var type in _assembly.GetTypes())
       {
         var isTestType = false;
-        foreach (var pattern in TEST_OBJECT_NAME_PATTERNS)
-        {
-          var typeMethods = type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static);
-          foreach (var method in typeMethods)
-          {
-            var methodName = GetTestMethodName(method.Name);
-            var isTestMethod = false;
-            foreach (var testObjectPattern in TEST_OBJECT_NAME_PATTERNS) {
-                if (new Regex(testObjectPattern).IsMatch(methodName)) {
-                    isTestMethod = true;
-                    break;
-                }
-            }
-            if (isTestMethod) {
-                _reporter.BeforeTest(methodName);
-                var result = _executor.ExecuteTestMethod(method);
-            }
+        foreach (var pattern in TEST_OR_TEST_GROUP_NAME_PATTERNS)
+          if (new Regex(pattern).IsMatch(type.Name) || new Regex(pattern).IsMatch(type.FullName)) { isTestType = true; break; }
+
+        var typeMethods = new List<MethodInfo>(type.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance));
+        typeMethods.AddRange(type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static));
+
+        foreach (var method in typeMethods) {
+          var methodName = GetTestMethodName(method.Name);
+          var isTestMethod = false;
+          var patternsToTest = isTestType ? TEST_GROUP_CHILD_TEST_NAME_PATTERNS : TEST_OR_TEST_GROUP_NAME_PATTERNS;
+          foreach (var pattern in patternsToTest)
+              if (new Regex(pattern).IsMatch(methodName)) { isTestMethod = true; break; }
+          if (isTestMethod) {
+              _reporter.BeforeTest(methodName);
+              var result = _executor.ExecuteTestMethod(method);
           }
         }
       }
