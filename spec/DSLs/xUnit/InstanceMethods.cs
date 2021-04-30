@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -10,7 +9,7 @@ namespace Specs.xUnit {
     [Test]
     public void TestSomething() {
       var project = CreateProject(framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
-      project.WriteFile("Program.cs", @"MiniSpec.Tests.Run(System.Console.Out, System.Console.Error);");
+      project.WriteFile("Program.cs", @"MiniSpec.Tests.Run();");
       project.Run();
 
       project.RunResult.OK.Should().Equals(true);
