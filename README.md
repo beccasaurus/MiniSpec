@@ -10,5 +10,7 @@ _Coming soon..._
 
 _Currently just using this as a fun C# refresher project!_
 
+_Nothing to see here._
+
 ---
 
