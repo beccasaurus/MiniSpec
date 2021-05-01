@@ -19,3 +19,5 @@ _Mini Testing Framework for .NET_
 ---
 
 <i class="fad fa-terminal"></i> `dotnet add package MiniSpec (Coming Soon)`
+
+---
