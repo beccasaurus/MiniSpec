@@ -5,12 +5,14 @@ using System.Text.RegularExpressions;
 namespace Specs.CLI {
 
   [TestFixture]
-  public class ListSpecsSpec : Spec {
+  public class ListSpec : Spec {
 
     [Test]
-    public void ListTopLevelLocalFunctions() {
+    public void List_TopLevelLocalFunctions() {
       var project = CreateProject(csharp: 9, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
+      #pragma warning disable 8321
+
       void TestSomething() {}
       void UnreleatedFunction1() {}
       void SpecSomething() {}
@@ -34,9 +36,11 @@ namespace Specs.CLI {
 
     [TestCase(Project.TargetFrameworks.Net50)]
     [TestCase(Project.TargetFrameworks.Net20)]
-    public void ListInstanceMethodsOfClass(Project.TargetFrameworks framework) {
+    public void List_InstanceMethods(Project.TargetFrameworks framework) {
       var project = CreateProject(framework: framework, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
+      #pragma warning disable 8321
+
       public class Program { public static int Main(string[] args) { return MiniSpec.Tests.Run(args); }}
 
       class RegularClass {
@@ -65,6 +69,9 @@ namespace Specs.CLI {
       ");
 
       project.Run("-l");
+      if (project.RunResult.StandardOutput.Contains("The runtime version supported by this application is unavailable"))
+        Assert.Ignore($"Framework {framework} unsupported on this machine, skipping test");
+
       System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
 
       project.RunResult.StandardError.Should().BeEmpty();
@@ -79,10 +86,13 @@ namespace Specs.CLI {
         .IsMatch(project.RunResult.StandardOutput).Should().BeFalse($"Expected this not to be listed as a test name: {unexpectedTestName}");
     }
 
+    [TestCase(Project.TargetFrameworks.Net20)]
     [TestCase(Project.TargetFrameworks.Net50)]
-    public void ListLocalFunctions(Project.TargetFrameworks framework) {
+    public void List_LocalFunctions(Project.TargetFrameworks framework) {
       var project = CreateProject(framework: framework, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
+      #pragma warning disable 8321
+
       public class Program { public static int Main(string[] args) { return MiniSpec.Tests.Run(args); }}
 
       class RegularClass {
@@ -108,6 +118,8 @@ namespace Specs.CLI {
       ");
 
       project.Run("-l");
+      if (project.RunResult.StandardOutput.Contains("The runtime version supported by this application is unavailable"))
+        Assert.Ignore($"Framework {framework} unsupported on this machine, skipping test");
       System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
 
       project.RunResult.StandardError.Should().BeEmpty();
