@@ -10,6 +10,22 @@
 
 ---
 
+`MiniSpec` is:
+
+- [Simple](#simple)
+- [Modern](#modern)
+- [Small](#small)
+- [Powerful](#powerful)
+- [Conventional](#conventional)
+- [Flexible](#flexible)
+- [Pretty](#pretty)
+- [Supported](#supported)
+- [Extensible](#extensible)
+- [Documented](#documented)
+- [Fun](#fun)
+
+Read the [documentation](#documentation) below for syntax, usage, instructions, etc.
+
 ## Simple
 
 What if .NET tests could be simpler? No `[Test]` attributes. No `Assert`.
@@ -120,7 +136,7 @@ Also supports custom test discovery and execution extensions out-of-the-box.
 
 ## Documented
 
-Hang out here or head over to [https://minispec.io](https://minispec.io) for documentation.
+Hang out here in the README or head over to [https://minispec.io](https://minispec.io) for documentation.
 
 ## Fun
 
