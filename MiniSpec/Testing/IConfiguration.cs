@@ -19,6 +19,7 @@ namespace MiniSpec.Testing {
     string[] Arguments { get; }
     IEnumerable<Regex> TestNamePatterns { get; }
     IEnumerable<Regex> TestGroupPatterns { get; }
+    IEnumerable<Regex> SpecGroupPatterns { get; }
     IEnumerable<Regex> TestNameWithinGroupPatterns { get; }
     IEnumerable<Regex> SetupPatterns { get; }
     IEnumerable<Regex> TeardownPatterns { get; }

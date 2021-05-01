@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 namespace MiniSpec.Testing {
   public interface ITest {
-    TestAction Invoke { get; }
+    TestFunc<object?> Invoke { get; }
     string Name { get; }
     string FullName { get; }
     TestStatus Status { get; set; } // Add 'set' to everything that an extension would want to possibly change (which is everything! be more open :)
     DateTime RunAt { get; }
     TimeSpan Duration { get; }
-    string STDOUT { get; }
-    string STDERR { get; }
-    Exception? Exception { get; }
-    object? ReturnObject { get; }
+    string STDOUT { get; set; }
+    string STDERR { get; set; }
+    Exception? Exception { get; set; }
+    object? ReturnObject { get; set; }
     string? TypeName { get; }
     string? MethodName { get; }
     string? AssemblyLocation { get; }

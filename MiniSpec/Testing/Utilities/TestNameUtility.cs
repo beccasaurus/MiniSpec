@@ -7,6 +7,8 @@ namespace MiniSpec.Testing.Utilities {
   public static class TestNameUtility {
     static readonly Regex EXTRACT_LOCAL_FUNCTION_NAME = new Regex(".*g__([^|]+)|");
     static readonly Regex EXTRACT_LOCAL_FUNCTION_PARENT_METHOD_NAME = new Regex("([<]+)([^>]+)([>]+)");
+    static readonly Regex TOP_LEVEL_STATEMENT_TYPE_AND_METHOD_PREFIX_PATTERN = new Regex(@"^<Program>\$\.Main\.");
+    static readonly Regex NON_FRIENDLY_TYPE_OR_METHOD_DISPLAY_NAME_CHARACTERS_PATTERN = new Regex("[^a-zA-Z0-9._]");
 
     public static bool MatchesAnyPattern(string text, IEnumerable<Regex> patterns) {
       foreach (var pattern in patterns)
@@ -25,10 +27,14 @@ namespace MiniSpec.Testing.Utilities {
     public static string FullMethodName(MethodInfo method) => FullMethodName(method.DeclaringType.FullName, method.Name);
     public static string FullMethodName(Type type, string methodName) => FullMethodName(type.FullName, methodName);
     public static string FullMethodName(string typeFullName, string methodName) {
+      string fullMethodName;
       if (IsLocalFunction(methodName))
-        return $"{typeFullName}.{LocalFunctionParentMethodName(methodName)}.{LocalFunctionName(methodName)}";
+        fullMethodName = $"{typeFullName}.{LocalFunctionParentMethodName(methodName)}.{LocalFunctionName(methodName)}";
       else
-        return $"{typeFullName}.{methodName}";
+        fullMethodName = $"{typeFullName}.{methodName}";
+      fullMethodName = TOP_LEVEL_STATEMENT_TYPE_AND_METHOD_PREFIX_PATTERN.Replace(fullMethodName, "");
+      fullMethodName = NON_FRIENDLY_TYPE_OR_METHOD_DISPLAY_NAME_CHARACTERS_PATTERN.Replace(fullMethodName, "");
+      return fullMethodName;
     }
 
     public static bool IsLocalFunction(MethodInfo method) => IsLocalFunction(method.Name);
@@ -59,6 +65,9 @@ namespace MiniSpec.Testing.Utilities {
 
     public static bool MatchesTestGroupPattern(string text, IConfiguration config) => MatchesAnyPattern(text, config.TestGroupPatterns);
     public static bool MatchesTestGroupPattern(string text, ITestSuite suite) => MatchesTestGroupPattern(text, suite.Config);
+
+    public static bool MatchesSpecGroupPattern(string text, IConfiguration config) => MatchesAnyPattern(text, config.SpecGroupPatterns);
+    public static bool MatchesSpecGroupPattern(string text, ITestSuite suite) => MatchesSpecGroupPattern(text, suite.Config);
 
     public static bool MatchesTestNameWithinGroupPattern(string text, IConfiguration config) => MatchesAnyPattern(text, config.TestNameWithinGroupPatterns);
     public static bool MatchesTestNameWithinGroupPattern(string text, ITestSuite suite) => MatchesTestNameWithinGroupPattern(text, suite.Config);

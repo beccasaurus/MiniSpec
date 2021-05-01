@@ -4,10 +4,12 @@ using MiniSpec.Private.Specs.DSL;
 
 namespace MiniSpec {
   public class Spec {
-    public static void Describe(string description, TestAction<ISpecContext> body) {
+
+    public static Spec Describe(string description, TestAction<ISpecContext> body) {
       var describeBlock = new DescribeBlock(description);
       var specContext = new SpecContext(describeBlock);
       body(specContext);
+      return new Spec();
     }
 
     // public static void It(string description, SpecBody body) {

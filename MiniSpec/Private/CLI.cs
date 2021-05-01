@@ -13,8 +13,8 @@ using MiniSpec.Private.Testing.Discovery;
 namespace MiniSpec.Private {
     static class CLI {
         internal static int Run(TextWriter stdout, TextWriter stderr, params string[] arguments) {
-            var config = Configuration.GlobalInstance ?? new Configuration();
-            var testSuite = TestSuite.GlobalInstance ?? new TestSuite(config);
+            var testSuite = TestSuite.InitializeOrGetGlobalInstance();
+            var config = Configuration.InitializeOrGetGlobalInstance();
 
             config.Arguments = arguments;
             config.STDOUT = stdout;

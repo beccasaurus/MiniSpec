@@ -6,7 +6,7 @@ using MiniSpec.Testing;
 
 namespace MiniSpec.Private.Testing {
   internal class Test : ITest {
-    internal Test(TestAction invoke, string name, string fullName, string? typeName, string? methodName, string? assemblyLocation, MethodInfo? method, Assembly? assembly) {
+    internal Test(TestFunc<object?> invoke, string name, string fullName, string? typeName, string? methodName, string? assemblyLocation, MethodInfo? method, Assembly? assembly) {
       _invoke = invoke;
       _name = name;
       _fullName = fullName;
@@ -17,7 +17,7 @@ namespace MiniSpec.Private.Testing {
       _assembly = assembly;
     }
 
-    TestAction _invoke;
+    TestFunc<object?> _invoke;
     string _name;
     string _fullName;
     TestStatus _status = TestStatus.NotRun;
@@ -36,16 +36,16 @@ namespace MiniSpec.Private.Testing {
     IEnumerable<TestAction> _teardowns = new List<TestAction>();
     IDictionary<string, object> _meta = new Dictionary<string, object>();
 
-    public TestAction Invoke { get => _invoke; }
+    public TestFunc<object?> Invoke { get => _invoke; }
     public string Name { get => _name; }
     public string FullName { get => _fullName; }
     public TestStatus Status { get => _status; set => _status = value; }
     public DateTime RunAt { get => _runAt; }
     public TimeSpan Duration { get => _duration; }
-    public string STDOUT { get => _stdout; }
-    public string STDERR { get => _stderr; }
-    public Exception? Exception { get => _exception; }
-    public object? ReturnObject { get => _returnObject; }
+    public string STDOUT { get => _stdout; set => _stdout = value; }
+    public string STDERR { get => _stderr; set => _stderr = value; }
+    public Exception? Exception { get => _exception; set => _exception = value; }
+    public object? ReturnObject { get => _returnObject; set => _returnObject = value; }
     public string? TypeName { get => _typeName; }
     public string? MethodName { get => _methodName; }
     public string? AssemblyLocation { get => _assemblyLocation; }

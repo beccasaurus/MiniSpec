@@ -1,4 +1,4 @@
-// using static MiniSpec.Spec;
+using static MiniSpec.Spec;
 
 // namespace SomewhereElse {
 //   public class Testing {
@@ -8,4 +8,9 @@
 //       });
 //     }
 //   }
+// }
+
+
+// class MySpecs {
+//   MySpecs() => Describe("hello", specs => {});
 // }

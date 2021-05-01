@@ -51,6 +51,7 @@ namespace MiniSpec.Private.Testing {
     string[] _arguments = new string[] {};
     List<Regex> _testNamePatterns = new List<Regex>() { new Regex("^[A-Z].*Test"), new Regex("^[A-Z].*Spec"), new Regex("^Test"), new Regex("^Spec") };
     List<Regex> _testGroupPatterns = new List<Regex>() { new Regex("^[A-Z].*Test"), new Regex("^[A-Z].*Spec"), new Regex("^Test"), new Regex("^Spec") };
+    List<Regex> _specGroupPatterns = new List<Regex>() { new Regex("^[A-Z].*Spec"), new Regex("^Spec") };
     List<Regex> _testNameWithinGroupPatterns = new List<Regex>() { new Regex("^[A-Z].*Test"), new Regex("^[A-Z].*Spec"), new Regex("^Test"), new Regex("^Spec"), new Regex("^It"), new Regex("^Can"), new Regex("^Should"), new Regex("^Example") };
     List<Regex> _setupPatterns = new List<Regex>() { new Regex("^[A-Z].*Set[uU]p"), new Regex("^[A-Z].*Before"), new Regex("^Set[uU]p"), new Regex("^Before") };
     List<Regex> _teardownPatterns = new List<Regex>() { new Regex("^[A-Z].*Tear[dD]own"), new Regex("^[A-Z].*After"), new Regex("^Tear[dD]own"), new Regex("^After") };
@@ -72,6 +73,7 @@ namespace MiniSpec.Private.Testing {
     public string[] Arguments { get => _arguments; set => _arguments = value; }
     public IEnumerable<Regex> TestNamePatterns { get => _testNamePatterns; }
     public IEnumerable<Regex> TestGroupPatterns { get => _testGroupPatterns; }
+    public IEnumerable<Regex> SpecGroupPatterns { get => _specGroupPatterns; }
     public IEnumerable<Regex> TestNameWithinGroupPatterns { get => _testNameWithinGroupPatterns; }
     public IEnumerable<Regex> SetupPatterns { get => _setupPatterns; }
     public IEnumerable<Regex> TeardownPatterns { get => _teardownPatterns; }

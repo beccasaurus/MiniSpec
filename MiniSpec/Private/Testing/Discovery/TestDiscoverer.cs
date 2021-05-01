@@ -17,9 +17,13 @@ namespace MiniSpec.Private.Testing.Discovery {
 
     void DiscoverTestsInAllAssemblies(ITestSuite suite) {
       foreach (var assemblyPath in suite.Config.AssemblyPaths) {
-        Assembly assembly;
-        if (assemblyPath == Assembly.GetEntryAssembly().Location) {
+        Assembly? assembly;
+        if (assemblyPath == Assembly.GetAssembly(typeof(TestDiscoverer)).Location) {
+            assembly = null;
+        } else if (assemblyPath == Assembly.GetEntryAssembly().Location) {
           assembly = Assembly.GetEntryAssembly();
+        } else if (assemblyPath == Assembly.GetExecutingAssembly().Location) {
+          assembly = Assembly.GetExecutingAssembly();
         } else {
           try {
             #if NET50
@@ -37,23 +41,43 @@ namespace MiniSpec.Private.Testing.Discovery {
             return;
           }
         }
-        DiscoverTestsInAssembly(assembly, suite);
+        if (assembly is not null) DiscoverTestsInAssembly(assembly, suite);
       }
     }
 
+    // TODO STDERR => StandardError and STDOUT => StandardOutput
+
     void DiscoverTestsInAssembly(Assembly assembly, ITestSuite suite) {
-      foreach (var type in assembly.GetTypes()) 
-        DiscoverTestsInType(type, suite, assembly);
+      foreach (var type in assembly.GetTypes()) {
+        var typeHasAnyTests = false;
+        
+        var methods = new List<MethodInfo>(type.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance));
+        methods.AddRange(type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static));
+        foreach (var method in methods) {
+          var discoveredMethodTests = DiscoverMethodTests(type, method, suite, methods, assembly);
+          if (discoveredMethodTests) typeHasAnyTests = true;
+        }
+
+        if (typeHasAnyTests is false) {
+          var typeIsSpecType = TestNameUtility.MatchesSpecGroupPattern(type.Name, suite);
+          if (typeIsSpecType) {
+            foreach (var constructor in type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)) {
+              if (constructor.GetParameters().Length == 0) {
+                try {
+                  constructor.Invoke(null); // Call it, it may define specs!
+                } catch (Exception e) {
+                  suite.Config.STDOUT.WriteLine($"Whoops, maybe shouldn't have called the constructor for {type.FullName}, it got angry. {e.Message}");
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
-    void DiscoverTestsInType(Type type, ITestSuite suite, Assembly assembly) {
-      var methods = new List<MethodInfo>(type.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance));
-      methods.AddRange(type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static));
-      foreach (var method in methods)
-        DiscoverMethodTests(type, method, suite, methods, assembly);
-    }
-
-    void DiscoverMethodTests(Type type, MethodInfo method, ITestSuite suite, List<MethodInfo> typeMethods, Assembly assembly) {
+    bool DiscoverMethodTests(Type type, MethodInfo method, ITestSuite suite, List<MethodInfo> typeMethods, Assembly assembly) {
+      var anyDiscovered = false;
+      // TODO UPDATE TO NOT CHECK FULL NAME, ONLY THE DECLARING TYPE NAME
       var typeIsTestGroup = TestNameUtility.MatchesTestGroupPattern(type.Name, suite) || TestNameUtility.MatchesTestGroupPattern(type.FullName, suite);
       var parentMethodIsTestGroup = TestNameUtility.IsLocalFunction(method.Name) && TestNameUtility.MatchesTestGroupPattern(TestNameUtility.LocalFunctionParentMethodName(method.Name)!, suite);
 
@@ -68,7 +92,12 @@ namespace MiniSpec.Private.Testing.Discovery {
       else
         methodHasChildTests = MethodHasChildFunctionMatchingPattern(method, typeMethods, suite.Config.TestNamePatterns);
 
+      var methodDefinesSpecs = MethodDefinesSpecs(method);
+      var parentMethodDefinesSpecs = ParentMethodDefinesSpecs(method);
+      var methodHasChildWhichDefinesSpecs = MethodHasChildWhichDefinesSpecs(method, typeMethods);
+
       if (methodMatchesTestName && ! methodHasChildTests) {
+        anyDiscovered = true;
         ((TestSuite) suite).AddTest(new Test(
           invoke: GetInvokeAction(method),
           name: TestNameUtility.MethodOrFunctionName(method.Name),
@@ -80,6 +109,20 @@ namespace MiniSpec.Private.Testing.Discovery {
           assembly: assembly
         ));
       }
+
+      return anyDiscovered;
+    }
+
+    static bool MethodDefinesSpecs(MethodInfo method) {
+      return true;
+    }
+
+    static bool ParentMethodDefinesSpecs(MethodInfo method) {
+      return true;
+    }
+
+    static bool MethodHasChildWhichDefinesSpecs(MethodInfo thisMethod, List<MethodInfo> typeMethods) {
+      return true;
     }
 
     static bool MethodHasChildFunctionMatchingPattern(MethodInfo thisMethod, List<MethodInfo> typeMethods, IEnumerable<Regex> patterns) {
@@ -90,14 +133,14 @@ namespace MiniSpec.Private.Testing.Discovery {
       return false;
     }
 
-    static TestAction GetInvokeAction(MethodInfo method) {
+    static TestFunc<object?> GetInvokeAction(MethodInfo method) {
       if (method.IsStatic) {
-        return () => { method.Invoke(null, null); };
+        return () => method.Invoke(null, null);
       } else {
         foreach (var constructor in method.DeclaringType.GetConstructors()) {
           if (constructor.GetParameters().Length == 0) {
             var instance = Activator.CreateInstance(method.DeclaringType);
-            return () => { method.Invoke(instance, null); };
+            return () => method.Invoke(instance, null);
           }
         }
       }

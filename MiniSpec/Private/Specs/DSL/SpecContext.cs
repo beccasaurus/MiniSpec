@@ -19,7 +19,7 @@ namespace MiniSpec.Private.Specs.DSL {
     public void RegisterTest(string description, TestAction? body = null) {
       // Register test! Walk up the describe tree to get all SETUP and TEARDOWN for this :)
       var test = new Test(
-        invoke: () => { if (body is not null) body(); }, // TODO setup/teardown :)
+        invoke: () => { if (body is not null) body(); return null; }, // TODO setup/teardown :)
         name: description,
         fullName: (DescribeBlock is null) ? description : $"{DescribeBlock.FullDescription} {description}",
         typeName: null,

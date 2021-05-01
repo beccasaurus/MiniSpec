@@ -130,7 +130,7 @@ namespace Specs.CLI {
     }
 
     [Test]
-    public void List_BDD() {
+    public void List_BDD_TopLevelStatements() {
       var project = CreateProject(csharp: 9, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
 
@@ -147,6 +147,43 @@ namespace Specs.CLI {
       });
 
       return MiniSpec.Tests.Run(args);");
+
+      project.Run("-l");
+      System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
+
+      project.RunResult.StandardError.Should().BeEmpty();
+      project.RunResult.OK.Should().BeTrue();
+
+      var output = project.RunResult.StandardOutput;
+      output.Should().Contain("Dog Can Bark");
+      output.Should().Contain("Dog Can Sit");
+      output.Should().Contain("Dog Barking Can Be Annoying");
+      output.Should().Contain("Dog Barking Should Be Quiet");
+    }
+
+    [Test]
+    public void List_BDD_DefinedInClasses() {
+      var project = CreateProject(csharp: 9, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
+      project.WriteFile("Program.cs", @"
+      using MiniSpec;
+
+      return MiniSpec.Tests.Run(args);
+
+      class Specs {
+        Specs() {
+          Spec.Describe(""Dog"", dog => {
+            dog.Can(""Bark"", () => { /* ... */ });
+            dog.Can(""Sit"", () => { /* ... */ });
+
+            dog.Describe(""Barking"", barking => {
+              barking.Can(""Be Annoying"");
+              barking.Should(""Be Quiet"");
+            });
+          });
+        }
+      }
+
+      ");
 
       project.Run("-l");
       System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
