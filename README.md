@@ -71,13 +71,6 @@ void TestTheAnswer() {
 }
 ```
 
-> The _entire_ public interface of `MiniSpec` is just 3 methods:
-> - `MiniSpec.Tests.Run(string[] args)`
-> - `MiniSpec.Spec.Describe(string description, Func body)`
-> - `MiniSpec...` `TODO` `Add method for registering dependency injection`
-> 
-> There. You just learned the whole API. Congratulations.
-
 ## Powerful
 
 You want Dependency Injection? Have dependency injection.
