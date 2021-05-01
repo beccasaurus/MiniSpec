@@ -31,8 +31,10 @@ Read the [documentation](#documentation) below for syntax, usage, instructions, 
 What if .NET tests could be simpler? No `[Test]` attributes. No `Assert`.
 
 ```cs
-bool TestShouldPass() => true;
-bool TestShouldFail() => false;
+string greeting = "Hello";
+
+bool TestShouldPass() => greeting == "Hello";
+bool TestShouldFail() => greeting == "Hey there";
 
 MiniSpec.Tests.Run(args);
 ```
