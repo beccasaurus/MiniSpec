@@ -12,5 +12,7 @@ namespace MiniSpec.Testing {
     TimeSpan Duration { get; }
     IEnumerable<ITest> Tests { get; }
     IDictionary<string, object> Meta { get; }
+    IEnumerable<TestAction> GlobalSetups { get; }
+    IEnumerable<TestAction> GlobalTeardowns { get; }
   }
 }

@@ -70,6 +70,7 @@ namespace MiniSpec.Private.Testing.Discovery {
 
       if (methodMatchesTestName && ! methodHasChildTests) {
         ((TestSuite) suite).AddTest(new Test(
+          invoke: GetInvokeAction(method),
           name: TestNameUtility.MethodOrFunctionName(method.Name),
           fullName: TestNameUtility.FullMethodName(method),
           typeName: type.FullName,
@@ -87,6 +88,20 @@ namespace MiniSpec.Private.Testing.Discovery {
           if (TestNameUtility.MatchesAnyPattern(TestNameUtility.LocalFunctionName(method.Name)!, patterns))
             return true;
       return false;
+    }
+
+    static TestAction GetInvokeAction(MethodInfo method) {
+      if (method.IsStatic) {
+        return () => { method.Invoke(null, null); };
+      } else {
+        foreach (var constructor in method.DeclaringType.GetConstructors()) {
+          if (constructor.GetParameters().Length == 0) {
+            var instance = Activator.CreateInstance(method.DeclaringType);
+            return () => { method.Invoke(instance, null); };
+          }
+        }
+      }
+      throw new NotImplementedException($"Don't yet know how to invoke method/function: {TestNameUtility.FullMethodName(method)}");
     }
   }
 }

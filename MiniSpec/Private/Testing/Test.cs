@@ -6,7 +6,8 @@ using MiniSpec.Testing;
 
 namespace MiniSpec.Private.Testing {
   internal class Test : ITest {
-    internal Test(string name, string fullName, string typeName, string methodName, string assemblyLocation, MethodInfo method, Assembly assembly) {
+    internal Test(TestAction invoke, string name, string fullName, string? typeName, string? methodName, string? assemblyLocation, MethodInfo? method, Assembly? assembly) {
+      _invoke = invoke;
       _name = name;
       _fullName = fullName;
       _typeName = typeName;
@@ -16,6 +17,7 @@ namespace MiniSpec.Private.Testing {
       _assembly = assembly;
     }
 
+    TestAction _invoke;
     string _name;
     string _fullName;
     TestStatus _status = TestStatus.NotRun;
@@ -25,31 +27,32 @@ namespace MiniSpec.Private.Testing {
     string _stderr = string.Empty;
     Exception? _exception;
     object? _returnObject;
-    string _typeName;
-    string _methodName;
-    string _assemblyLocation;
-    Assembly _assembly;
-    MethodInfo _method;
-    IEnumerable<MethodInfo> _setups = new List<MethodInfo>();
-    IEnumerable<MethodInfo> _teardowns = new List<MethodInfo>();
+    string? _typeName;
+    string? _methodName;
+    string? _assemblyLocation;
+    Assembly? _assembly;
+    MethodInfo? _method;
+    IEnumerable<TestAction> _setups = new List<TestAction>();
+    IEnumerable<TestAction> _teardowns = new List<TestAction>();
     IDictionary<string, object> _meta = new Dictionary<string, object>();
 
+    public TestAction Invoke { get => _invoke; }
     public string Name { get => _name; }
     public string FullName { get => _fullName; }
-    public TestStatus Status { get => _status; }
+    public TestStatus Status { get => _status; set => _status = value; }
     public DateTime RunAt { get => _runAt; }
     public TimeSpan Duration { get => _duration; }
     public string STDOUT { get => _stdout; }
     public string STDERR { get => _stderr; }
     public Exception? Exception { get => _exception; }
     public object? ReturnObject { get => _returnObject; }
-    public string TypeName { get => _typeName; }
-    public string MethodName { get => _methodName; }
-    public string AssemblyLocation { get => _assemblyLocation; }
-    public Assembly Assembly { get => _assembly; }
-    public MethodInfo Method { get => _method; }
-    public IEnumerable<MethodInfo> Setups { get => _setups; }
-    public IEnumerable<MethodInfo> Teardowns { get => _teardowns; }
+    public string? TypeName { get => _typeName; }
+    public string? MethodName { get => _methodName; }
+    public string? AssemblyLocation { get => _assemblyLocation; }
+    public Assembly? Assembly { get => _assembly; }
+    public MethodInfo? Method { get => _method; }
+    public IEnumerable<TestAction> Setups { get => _setups; }
+    public IEnumerable<TestAction> Teardowns { get => _teardowns; }
     public IDictionary<string, object> Meta { get => _meta; }
   }
 }

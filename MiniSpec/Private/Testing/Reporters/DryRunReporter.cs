@@ -1,7 +1,4 @@
-using System;
-
 using MiniSpec.Testing;
-using MiniSpec.Testing.Utilities;
 
 namespace MiniSpec.Private.Testing.Reporters {
   internal class DryRunReporter : ITestReporter {
@@ -10,10 +7,7 @@ namespace MiniSpec.Private.Testing.Reporters {
     public void BeforeSuite(ITestSuite suite) {  }
     public void AfterSuite(ITestSuite suite) {  }
     public void BeforeTest(ITestSuite suite, ITest test) {
-      if (suite.Config.Verbose)
-        suite.Config.STDOUT.WriteLine(test.FullName);
-      else
-        suite.Config.STDOUT.WriteLine(test.Name);
+      suite.Config.STDOUT.WriteLine(test.FullName);
     }
     public void AfterTest(ITestSuite suite, ITest test) {  }
   }

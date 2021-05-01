@@ -17,6 +17,7 @@ namespace Specs.CLI {
       void UnreleatedFunction1() {}
       void SpecSomething() {}
       void UnreleatedFunction2() {}
+
       return MiniSpec.Tests.Run(args);");
 
       project.Run("-l");
@@ -25,13 +26,11 @@ namespace Specs.CLI {
       project.RunResult.StandardError.Should().BeEmpty();
       project.RunResult.OK.Should().BeTrue();
 
+      var output = project.RunResult.StandardOutput;
       foreach (var expectedTestName in new[] { "TestSomething", "SpecSomething" })
-        new Regex($"^{expectedTestName}", RegexOptions.Multiline)
-        .IsMatch(project.RunResult.StandardOutput).Should().BeTrue($"Expected listed test name: {expectedTestName}");
-
+        output.Should().Contain(expectedTestName);
       foreach (var unexpectedTestName in new[] { "UnreleatedFunction1", "UnreleatedFunction2" })
-        new Regex($"^{unexpectedTestName}", RegexOptions.Multiline)
-        .IsMatch(project.RunResult.StandardOutput).Should().BeFalse($"Expected this not to be listed as a test name: {unexpectedTestName}");
+        output.Should().NotContain(unexpectedTestName);
     }
 
     [TestCase(Project.TargetFrameworks.Net50)]
@@ -77,13 +76,11 @@ namespace Specs.CLI {
       project.RunResult.StandardError.Should().BeEmpty();
       project.RunResult.OK.Should().BeTrue();
 
+      var output = project.RunResult.StandardOutput;
       foreach (var expectedTestName in new[] { "TestOne", "TestTwo", "ItBarks", "ShouldBark", "CanBark", "ItMeows", "ShouldMeow", "CanMeow" })
-        new Regex($"^{expectedTestName}", RegexOptions.Multiline)
-        .IsMatch(project.RunResult.StandardOutput).Should().BeTrue($"Expected listed test name: {expectedTestName}");
-
+        output.Should().Contain(expectedTestName);
       foreach (var unexpectedTestName in new[] { "ItDoesSomething", "ShouldDoSomething", "CanDoSomething", "notATest", "_NotATest", "UnrelatedDog", "UnrelatedCat" })
-        new Regex($"^{unexpectedTestName}", RegexOptions.Multiline)
-        .IsMatch(project.RunResult.StandardOutput).Should().BeFalse($"Expected this not to be listed as a test name: {unexpectedTestName}");
+        output.Should().NotContain(unexpectedTestName);
     }
 
     [TestCase(Project.TargetFrameworks.Net20)]
@@ -125,15 +122,43 @@ namespace Specs.CLI {
       project.RunResult.StandardError.Should().BeEmpty();
       project.RunResult.OK.Should().BeTrue();
 
+      var output = project.RunResult.StandardOutput;
       foreach (var expectedTestName in new[] { "TestFoo", "TestBar", "ItDoesBar", "TestWow" })
-        new Regex($"^{expectedTestName}", RegexOptions.Multiline)
-        .IsMatch(project.RunResult.StandardOutput).Should().BeTrue($"Expected listed test name: {expectedTestName}");
-
-      foreach (var unexpectedTestName in new[] { "ItDoesFoo", "AnotherMethod", "TestMethod" })
-        new Regex($"^{unexpectedTestName}", RegexOptions.Multiline)
-        .IsMatch(project.RunResult.StandardOutput).Should().BeFalse($"Expected this not to be listed as a test name: {unexpectedTestName}");
+        output.Should().Contain(expectedTestName);
+      foreach (var unexpectedTestName in new[] { "ItDoesFoo", "AnotherMethod" })
+        output.Should().NotContain(unexpectedTestName);
     }
 
-    // Next: --list --details (details reporter) for Setup/Teardown/Constructor/Dispose/Group
+    [Test]
+    public void List_BDD() {
+      var project = CreateProject(csharp: 9, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
+      project.WriteFile("Program.cs", @"
+
+      using static MiniSpec.Spec;
+
+      Describe(""Dog"", dog => {
+        dog.Can(""Bark"", () => { /* ... */ });
+        dog.Can(""Sit"", () => { /* ... */ });
+
+        dog.Describe(""Barking"", barking => {
+          barking.Can(""Be Annoying"");
+          barking.Should(""Be Quiet"");
+        });
+      });
+
+      return MiniSpec.Tests.Run(args);");
+
+      project.Run("-l");
+      System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
+
+      project.RunResult.StandardError.Should().BeEmpty();
+      project.RunResult.OK.Should().BeTrue();
+
+      var output = project.RunResult.StandardOutput;
+      output.Should().Contain("Dog Can Bark");
+      output.Should().Contain("Dog Can Sit");
+      output.Should().Contain("Dog Barking Can Be Annoying");
+      output.Should().Contain("Dog Barking Should Be Quiet");
+    }
   }
 }

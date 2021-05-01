@@ -13,22 +13,17 @@ using MiniSpec.Private.Testing.Discovery;
 namespace MiniSpec.Private {
     static class CLI {
         internal static int Run(TextWriter stdout, TextWriter stderr, params string[] arguments) {
-            var config = new Configuration(
-                dir: Environment.CurrentDirectory,
-                args: arguments,
-                stdout: stdout,
-                stderr: stderr,
-                suiteExecutor: new TestSuiteExecutor(),
-                executor: new TestExecutor(),
-                reporter: new DocumentationReporter(),
-                discoverer: new TestDiscoverer()
-            );
+            var config = Configuration.GlobalInstance ?? new Configuration();
+            var testSuite = TestSuite.GlobalInstance ?? new TestSuite(config);
+
+            config.Arguments = arguments;
+            config.STDOUT = stdout;
+            config.STDERR = stderr;
 
             var parseResult = ParseArguments(config, new List<string>(arguments));
             if (parseResult is not null)
                 return parseResult.GetValueOrDefault();
 
-            var testSuite = new TestSuite(config);
             config.TestDiscoverer.DiscoverTests(testSuite);
             var testResult = config.TestSuiteExecutor.RunTestSuite(testSuite);
 
