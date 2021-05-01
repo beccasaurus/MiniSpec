@@ -126,6 +126,12 @@ Hang out here or head over to [https://minispec.io](https://minispec.io) for doc
 
 Written with developer fun and friendliness in mind. Have fun with it!
 
+## Why?
+
+I recently returned to `C#` from many years away and wasn't enjoying the existing `dotnet test` developer experience.
+
+I wanted to scrape the rust off of my `C#` skills by making something and... apparently this is what I ended up with!
+
 # Documentation
 
 _Coming soon! Still authoring. Having fun with it_ 😄
