@@ -121,7 +121,7 @@ $ dotnet test --before Prepare --after Cleanup --test Example
 
 > Also supports TAP out-of-the-box. Just run `dotnet run --tap`
 >
-> For JUnit XML: `dotnet package add MiniSpec.JUnit` and `dotnet run --junit`
+> For JUnit XML: `dotnet add package MiniSpec.JUnit` and `dotnet run --junit`
 
 ## Supported
 
