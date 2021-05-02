@@ -7,7 +7,7 @@
         {% unless logo_path == empty %}
           <a class="site-logo" href="{{ '/' | relative_url }}"><img src="{{ logo_path | relative_url }}" alt="{{ site.masthead_title | default: site.title }}"></a>
         {% endunless %}
-        <a class="site-title" href="{{ '/' | relative_url }}"><i class="fad fa-terminal"></i><code>minispec</code></a>
+        <a class="site-title" href="{{ '/' | relative_url }}"><i class="fad fa-terminal"></i><code>MiniSpec</code></a>
         <ul class="visible-links">
           {%- for link in site.data.navigation.main -%}
             <li class="masthead__menu-item">
