@@ -59,6 +59,8 @@ Spec.Describe("Dog", dog => {
 
 ## Small
 
+Very small interface, see [syntax overview](#syntax) below.
+
 No `Assert` provided. _Feel free to bring your own!_
 
 Use `Assert` from `xUnit` or `NUnit`. Or `FluentAssertions`. Or `NExpect`. It all works.
