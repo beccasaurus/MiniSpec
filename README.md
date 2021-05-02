@@ -28,7 +28,7 @@ Read the [documentation](#documentation) below for syntax, usage, instructions, 
 
 ## Simple
 
-What if .NET tests could be simpler? No `[Test]` attributes. No `Assert`.
+**What if .NET tests were much simpler? No `[Test]` attributes. No `Assert`.**
 
 ```cs
 string greeting = "Hello";
@@ -43,7 +43,7 @@ MiniSpec.Tests.Run(args);
 
 ## Modern
 
-What if one test framework provided both xUnit and BDD style tests?
+**What if one test framework provided both xUnit and BDD style tests?**
 
 ```cs
 using MiniSpec;
@@ -59,7 +59,7 @@ Spec.Describe("Dog", dog => {
 
 ## Small
 
-What if one framework was really tiny and focused on just the testing syntax?
+**What if one framework was really tiny and focused on just the testing syntax?**
 
 No `Assert` provided.
 
@@ -77,7 +77,7 @@ void TestTheAnswer() {
 
 ## Powerful
 
-You want Dependency Injection? Have dependency injection.
+**What if really simple Dependency Injection was included?**
 
 ```cs
 TODO
@@ -85,7 +85,7 @@ TODO
 
 ## Conventional
 
-What if conventional terms like `SetUp` and `TearDown` just worked?
+**What if conventional terms like `SetUp` and `TearDown` just worked?**
 
 ```cs
 class TestDog {
@@ -98,7 +98,7 @@ class TestDog {
 
 ## Flexible
 
-Make it your own and configure your own personal syntax.
+**What if you could configure a test framework with _your own preferred syntax?_**
 
 ```cs
 class Specification {
@@ -115,27 +115,44 @@ $ dotnet test --before Prepare --after Cleanup --test Example
 
 ## Pretty
 
-Outputs nice pretty colors with no annoying clutter by default.
+**What if the test output was pretty, colorful, short, and easy to read?**
 
 (_screenshot_)
 
-Also supports TAP out-of-the-box. Just pass `--tap`.
+> Also supports TAP out-of-the-box. Just run `dotnet run --tap`
+>
+> For JUnit XML: `dotnet package add MiniSpec.JUnit` and `dotnet run --junit`
 
 ## Supported
 
-Works on _every current version of .NET_ from .NET 2.0 and beyond.
+**What if a test framework worked on _all versions of .NET_, going back to .NET 2.0?**
 
-> _Tested on .NET Framework 2.0-4.8, .NET 5, Core 1.0-3.1, and Standard 1.0-2.1_
+> _Packages available for:_
+> - .NET 5
+> - .NET Core 1.0 - 3.1
+> - .NET Standard 1.0 - 2.1
+> - .NET Framework 2.0 - 4.8
 
 ## Extensible
 
-Easily write your own output reporter. You don't even need a `MiniSpec` dependency.
+**What if you could easily configure your own output?**
 
-Also supports custom test discovery and execution extensions out-of-the-box.
+_You can easily write your own output reporter._
+
+_You don't even need a `MiniSpec` dependency!_
+
+> _Also supports:_
+> - Custom test discovery
+> - Custom executor for tests
+> - Custom executor for the whole suite
 
 ## Documented
 
-Hang out here in the README or head over to [https://minispec.io](https://minispec.io) for documentation.
+**What if all the documentation you needed was simply in the README?**
+
+_The entire syntax is documented here in this README!_
+
+> _You can also head over to [https://minispec.io](https://minispec.io) to see it on a pretty website._
 
 ## Fun
 
