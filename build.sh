@@ -8,5 +8,6 @@ cd MiniSpec
 dotnet build
 (( $? == 0 )) || exit $?
 
+[ "$1" = --no-test ] && exit 0
 cd ../spec
 dotnet test "$@"

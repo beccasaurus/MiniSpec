@@ -1,47 +1,27 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-using MiniSpec.Testing;
-using MiniSpec.Private.Testing;
+using MiniSpec.Testing.Configuration;
 using MiniSpec.Private.Testing.Reporters;
-using MiniSpec.Private.Testing.Executors;
-using MiniSpec.Private.Testing.Discovery;
 
-namespace MiniSpec.Private {
-    static class CLI {
-        internal static int Run(TextWriter stdout, TextWriter stderr, params string[] arguments) {
-            var testSuite = TestSuite.InitializeOrGetGlobalInstance();
-            var config = Configuration.InitializeOrGetGlobalInstance();
-
-            config.Arguments = arguments;
-            config.STDOUT = stdout;
-            config.STDERR = stderr;
-
-            var parseResult = ParseArguments(config, new List<string>(arguments));
-            if (parseResult is not null)
-                return parseResult.GetValueOrDefault();
-
-            config.TestDiscoverer.DiscoverTests(testSuite);
-            var testResult = config.TestSuiteExecutor.RunTestSuite(testSuite);
-
-            if (config.DryRun) return 0;
-            switch (testResult) {
-                case TestStatus.Passed: return 0;
-                case TestStatus.Failed: return 1;
-                case TestStatus.Skipped: return 2;
-                default: return 3;
-            }
-        }
-
-        static int? ParseArguments(Configuration config, List<string> arguments) {
+namespace MiniSpec.Testing.CommandLineInterface {
+    public class Parser {
+        public int? ParseArguments(IConfig config, List<string> arguments) {
             while (arguments.Count > 0) {
                 var argument = arguments[0];
                 switch (argument) {
                     case "--version":
-                        config.STDOUT.WriteLine($"MiniSpec version {Assembly.GetEntryAssembly().GetName().Version}");
+                        #if NO_GET_TYPE_INFO_AVAILABLE
+                        var versionAssembly = Assembly.GetAssembly(typeof(Parser));
+                        #else
+                        var versionAssembly = typeof(Parser).GetTypeInfo().Assembly;
+                        #endif
+                        if (versionAssembly is null)
+                            config.StandardOutput!.WriteLine($"MiniSpec");
+                        else
+                            config.StandardOutput!.WriteLine($"MiniSpec version {versionAssembly.GetName().Version}");
                         return 0;
                     case "--list":
                         config.DryRun = true;
@@ -62,19 +42,23 @@ namespace MiniSpec.Private {
                                 if (smallLetter.IsMatch(character.ToString())) {
                                     arguments.Add($"{dashOrPlus}{character}");
                                 } else {
-                                    config.STDERR.WriteLine($"Unknown argument: '{argument}'");
+                                    config.StandardError!.WriteLine($"Unknown argument: '{argument}'");
                                     return 1;
                                 }
                             }
                             arguments.RemoveAt(0);
                             break;
                         } else {
-                            config.STDERR.WriteLine($"Unknown argument: '{argument}'");
+                            config.StandardError!.WriteLine($"Unknown argument: '{argument}'");
                             return 1;
                         }
                 }
             }
-            config.AddAssemblyPath(Assembly.GetEntryAssembly().Location);
+
+            // This should be somewhere else
+            var assembly = Assembly.GetEntryAssembly();
+            if (assembly is not null)
+                config.AssemblyPaths.Add(assembly.Location);
             return null;
         }
     }

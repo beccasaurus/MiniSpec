@@ -259,8 +259,8 @@ public class IntegrationTest {
             
         using var minispec = new System.Diagnostics.Process {
             StartInfo = {
-                RedirectStandardOutput = true, // Get the STDOUT
-                RedirectStandardError = true,  // Get the STDERR
+                RedirectStandardOutput = true, // Get the StandardOutput
+                RedirectStandardError = true,  // Get the StandardError
                 FileName = minispecExe,
                 Arguments = "MyTests.dll"
             }
@@ -269,9 +269,9 @@ public class IntegrationTest {
         // Act
         minispec.Start();
         minispec.WaitForExit();
-        var stdout = minispec.StandardOutput.ReadToEnd();
-        var stderr = minispec.StandardError.ReadToEnd();
-        var output = $"{stdout}{stderr}";
+        var StandardOutput = minispec.StandardOutput.ReadToEnd();
+        var StandardError = minispec.StandardError.ReadToEnd();
+        var output = $"{StandardOutput}{StandardError}";
         minispec.Kill();
 
         // Assert
@@ -290,8 +290,8 @@ So, what's happening here?
 
 - We assume that there will be a `minispec.exe` executable (_or simply `minispec` on Linux_).
 - We invoke the `minispec.exe` process passing the DLL with our defined tests as an argument.
-- We read STDOUT and STDERR from the process result, i.e. all of the program's console output.
-- _STDOUT and STDERR are combined because we don't currently care which the results output to._
+- We read StandardOutput and StandardError from the process result, i.e. all of the program's console output.
+- _StandardOutput and StandardError are combined because we don't currently care which the results output to._
 - We look for expected messages in the output, e.g. `PASS [testname]` or `FAIL [testname]`
 
 

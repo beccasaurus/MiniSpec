@@ -9,7 +9,7 @@ namespace Specs.CLI {
     [Test]
     public void GetMiniSpecVersion() {
       var project = CreateProject(framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
-      project.WriteFile("Program.cs", @"return MiniSpec.Tests.Run(args);");
+      project.WriteFile("Program.cs", @"return MiniSpec.Tests.Run(System.Console.Out, System.Console.Error, args);");
 
       project.Run("--version");
 

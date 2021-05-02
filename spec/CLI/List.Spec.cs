@@ -13,12 +13,14 @@ namespace Specs.CLI {
       project.WriteFile("Program.cs", @"
       #pragma warning disable 8321
 
+      using System;
+
       void TestSomething() {}
       void UnreleatedFunction1() {}
       void SpecSomething() {}
       void UnreleatedFunction2() {}
 
-      return MiniSpec.Tests.Run(args);");
+      return MiniSpec.Tests.Run(Console.Out, Console.Error, args);");
 
       project.Run("-l");
       System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
@@ -33,14 +35,16 @@ namespace Specs.CLI {
         output.Should().NotContain(unexpectedTestName);
     }
 
+    // [TestCase(Project.TargetFrameworks.Net20)]
     [TestCase(Project.TargetFrameworks.Net50)]
-    [TestCase(Project.TargetFrameworks.Net20)]
     public void List_InstanceMethods(Project.TargetFrameworks framework) {
       var project = CreateProject(framework: framework, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
       #pragma warning disable 8321
 
-      public class Program { public static int Main(string[] args) { return MiniSpec.Tests.Run(args); }}
+      using System;
+
+      public class Program { public static int Main(string[] args) { return MiniSpec.Tests.Run(Console.Out, Console.Error, args); }}
 
       class RegularClass {
         void TestOne() {}
@@ -83,14 +87,16 @@ namespace Specs.CLI {
         output.Should().NotContain(unexpectedTestName);
     }
 
-    [TestCase(Project.TargetFrameworks.Net20)]
+    // [TestCase(Project.TargetFrameworks.Net20)]
     [TestCase(Project.TargetFrameworks.Net50)]
     public void List_LocalFunctions(Project.TargetFrameworks framework) {
       var project = CreateProject(framework: framework, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
       #pragma warning disable 8321
 
-      public class Program { public static int Main(string[] args) { return MiniSpec.Tests.Run(args); }}
+      using System;
+
+      public class Program { public static int Main(string[] args) { return MiniSpec.Tests.Run(Console.Out, Console.Error, args); }}
 
       class RegularClass {
         void RegularMethod() {
@@ -134,6 +140,7 @@ namespace Specs.CLI {
       var project = CreateProject(csharp: 9, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
 
+      using System;
       using static MiniSpec.Spec;
 
       Describe(""Dog"", dog => {
@@ -146,7 +153,7 @@ namespace Specs.CLI {
         });
       });
 
-      return MiniSpec.Tests.Run(args);");
+      return MiniSpec.Tests.Run(Console.Out, Console.Error, args);");
 
       project.Run("-l");
       System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
@@ -165,9 +172,10 @@ namespace Specs.CLI {
     public void List_BDD_DefinedInClasses() {
       var project = CreateProject(csharp: 9, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
+      using System;
       using MiniSpec;
 
-      return MiniSpec.Tests.Run(args);
+      return MiniSpec.Tests.Run(Console.Out, Console.Error, args);
 
       class Specs {
         Specs() {

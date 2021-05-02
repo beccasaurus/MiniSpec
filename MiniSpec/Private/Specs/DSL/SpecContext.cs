@@ -24,12 +24,12 @@ namespace MiniSpec.Private.Specs.DSL {
         fullName: (DescribeBlock is null) ? description : $"{DescribeBlock.FullDescription} {description}",
         typeName: null,
         methodName: null,
-        assemblyLocation: Assembly.GetExecutingAssembly().Location,
+        assemblyLocation: Assembly.GetEntryAssembly().Location,
         method: null,
         assembly: null
       );
       if (body is null) test.Status = TestStatus.Skipped;
-      TestSuite.InitializeOrGetGlobalInstance().AddTest(test);
+      TestSuite.InitializeOrGetGlobalInstance().Tests.Add(test);
     }
 
     public void It(string description, TestAction body) { RegisterTest($"It {description}", body); }
