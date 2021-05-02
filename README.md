@@ -59,9 +59,9 @@ Spec.Describe("Dog", dog => {
 
 ## Small
 
-Very small interface, see [syntax overview](#syntax) below.
+What if one framework was really tiny and focused on just the testing syntax?
 
-No `Assert` provided. _Feel free to bring your own!_
+No `Assert` provided.
 
 Use `Assert` from `xUnit` or `NUnit`. Or `FluentAssertions`. Or `NExpect`. It all works.
 
@@ -72,6 +72,8 @@ void TestTheAnswer() {
   Assert.That(TheAnswer, Is.EqualTo(42));
 }
 ```
+
+> _`MiniSpec` has a very small interface, see [syntax overview](#syntax) below!_
 
 ## Powerful
 
