@@ -7,8 +7,8 @@ main:
   #   url: "/MiniSpec_HowToAuthorATestingFramework_byRebeccaTaylor.pdf"
   # - title: '<i class="fad fa-tablet-alt"></i> ePub'
   #   url: "/MiniSpec_HowToAuthorATestingFramework_byRebeccaTaylor.epub"
-  # - title: '<i class="fad fa-code"></i> Code'
-  #   url: "https://github.com/beccasaurus/minispec"
+  - title: '<i class="fad fa-code"></i> Code'
+    url: "https://github.com/beccasaurus/MiniSpec"
   # - title: '<i class="fab fa-creative-commons"></i> CC'
   #   url: "https://creativecommons.org/licenses/by-nc-sa/3.0/"
 Introduction:
