@@ -33,9 +33,9 @@ jobs:
       run: dotnet build --configuration Release --no-restore
       env:
         NUGET_PACKAGES: /tmp/globalPackagesFolder/
-        MINISPEC_FRAMEWORKS: "net50"
+        MINISPEC_FRAMEWORKS: "net50;netcoreapp3.1"
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       env:
         NUGET_PACKAGES: /tmp/globalPackagesFolder/
-        MINISPEC_FRAMEWORKS: "net50"
+        MINISPEC_FRAMEWORKS: "net50;netcoreapp3.1"
