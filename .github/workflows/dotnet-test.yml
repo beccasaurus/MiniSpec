@@ -17,35 +17,35 @@ jobs:
       run: sudo apt update && sudo apt install mono-devel
     - uses: actions/checkout@v2
 
-    - name: Setup .NET Core SDK 1.0
-      uses: actions/setup-dotnet@v1.7.2
-      with:
-        dotnet-version: 1.0.x
+    # - name: Setup .NET Core SDK 1.0
+    #   uses: actions/setup-dotnet@v1.7.2
+    #   with:
+    #     dotnet-version: 1.0.x
 
-    - name: Setup .NET Core SDK 1.1
-      uses: actions/setup-dotnet@v1.7.2
-      with:
-        dotnet-version: 1.1.x
+    # - name: Setup .NET Core SDK 1.1
+    #   uses: actions/setup-dotnet@v1.7.2
+    #   with:
+    #     dotnet-version: 1.1.x
 
-    - name: Setup .NET Core SDK 2.0
-      uses: actions/setup-dotnet@v1.7.2
-      with:
-        dotnet-version: 2.0.x
+    # - name: Setup .NET Core SDK 2.0
+    #   uses: actions/setup-dotnet@v1.7.2
+    #   with:
+    #     dotnet-version: 2.0.x
 
     - name: Setup .NET Core SDK 2.1
       uses: actions/setup-dotnet@v1.7.2
       with:
         dotnet-version: 2.1.x
 
-    - name: Setup .NET Core SDK 2.2
-      uses: actions/setup-dotnet@v1.7.2
-      with:
-        dotnet-version: 2.2.x
+    # - name: Setup .NET Core SDK 2.2
+    #   uses: actions/setup-dotnet@v1.7.2
+    #   with:
+    #     dotnet-version: 2.2.x
 
-    - name: Setup .NET Core SDK 3.0
-      uses: actions/setup-dotnet@v1.7.2
-      with:
-        dotnet-version: 3.0.x
+    # - name: Setup .NET Core SDK 3.0
+    #   uses: actions/setup-dotnet@v1.7.2
+    #   with:
+    #     dotnet-version: 3.0.x
 
     - name: Setup .NET Core SDK 3.1
       uses: actions/setup-dotnet@v1.7.2
