@@ -1,5 +1,7 @@
 using FluentAssertions;
+
 using NUnit.Framework;
+
 namespace Specs.xUnit {
 
   [TestFixture]
