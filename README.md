@@ -6,7 +6,9 @@
 
 ---
 
-ℹ️ _Coming soon to a package manager near you..._
+ℹ️ _Coming soon to a package manager near you... probably..._
+
+> _This is really just a fun project I'm hacking on to relearn a ton of `C#`_
 
 ---
 
