@@ -169,6 +169,9 @@ namespace MiniSpec.Private.Testing.Discovery {
             return () => method.Invoke(instance, null);
           }
         }
+        // If we didn't find a constructor without arguments, meh, let's try to make an instance anyway!
+        // var anotherInstance = Activator.CreateInstance(method.DeclaringType);
+        // return () => method.Invoke(anotherInstance, null);
       }
       throw new NotImplementedException($"Don't yet know how to invoke method/function: {TestNameUtility.FullMethodName(method)}");
     }

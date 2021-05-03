@@ -20,9 +20,7 @@
 
       You can set MINISPEC_FRAMEWORKS and this will use that value (which is also used by the test framework and we'll run tests against every version)
     -->
-    <!-- <TargetFrameworks Condition=" '$(MINISPEC_FRAMEWORKS)' == '' ">net20;net50;netstandard1.6</TargetFrameworks> -->
-    <!-- <TargetFrameworks Condition=" '$(MINISPEC_FRAMEWORKS)' == '' ">net20;net48;net50;netstandard1.6;netstandard2.1</TargetFrameworks> -->
-    <TargetFrameworks Condition=" '$(MINISPEC_FRAMEWORKS)' == '' ">net20;net35;net50;netstandard2.1;netcoreapp1.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(MINISPEC_FRAMEWORKS)' == '' ">net20;net48;net50;netstandard2.1;netcoreapp1.0;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
     <TargetFrameworks Condition=" '$(MINISPEC_FRAMEWORKS)' != '' ">$(MINISPEC_FRAMEWORKS)</TargetFrameworks>
 
     <!-- Uncomment this (and comment out above) to target ALL TEH FRAMEWORKS (when packing for release) [RUN THE TEST AGAINST *ALL* VERSIONS] -->

@@ -33,7 +33,9 @@ jobs:
       run: dotnet build --Config Release --no-restore
       env:
         NUGET_PACKAGES: /tmp/globalPackagesFolder/
+        MINISPEC_FRAMEWORKS: "net50"
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       env:
         NUGET_PACKAGES: /tmp/globalPackagesFolder/
+        MINISPEC_FRAMEWORKS: "net50"

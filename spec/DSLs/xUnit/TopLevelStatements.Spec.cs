@@ -5,11 +5,11 @@ namespace Specs.xUnit {
   [TestFixture]
   public class TopLevelStatementSpecs : Spec {
 
-    [Test]
-    public void xUnit_TopLevelStatements() {
+    [TestCase(Project.TargetFrameworks.Net50)]
+    public void xUnit_TopLevelStatements(Project.TargetFrameworks framework) {
       Assert.Ignore("This is one of the next specs to implement, not ready yet, currently refactoring :)");
 
-      var project = CreateProject(csharp: 9, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
+      var project = CreateProject(csharp: 9, framework: framework, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
       #pragma warning disable 8321
 
