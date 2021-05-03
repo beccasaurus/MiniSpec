@@ -10,8 +10,8 @@ namespace MiniSpec.Testing {
     TestStatus Status { get; set; } // Add 'set' to everything that an extension would want to possibly change (which is everything! be more open :)
     DateTime RunAt { get; }
     TimeSpan Duration { get; }
-    string STDOUT { get; set; }
-    string STDERR { get; set; }
+    string StandardOutput { get; set; }
+    string StandardError { get; set; }
     Exception? Exception { get; set; }
     object? ReturnObject { get; set; }
     string? TypeName { get; }

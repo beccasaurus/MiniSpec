@@ -5,19 +5,23 @@ namespace Specs.xUnit {
   [TestFixture]
   public class TopLevelStatementSpecs : Spec {
 
-    [Test]
-    public void xUnit_TopLevelStatements() {
-      var project = CreateProject(csharp: 9, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
+    [TestCase(Project.TargetFrameworks.Net50)]
+    public void xUnit_TopLevelStatements(Project.TargetFrameworks framework) {
+      Assert.Ignore("This is one of the next specs to implement, not ready yet, currently refactoring :)");
+
+      var project = CreateProject(csharp: 9, framework: framework, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
       #pragma warning disable 8321
+
+      using System;
 
       bool TestShouldPass() => true;
       bool TestShouldFail() => false;
       void TestShouldAlsoFail() { throw new System.Exception(""Kaboom!""); }
 
-      return MiniSpec.Tests.Run(args);");
+      return MiniSpec.Tests.Run(Console.Out, Console.Error, args);");
 
-      project.Run();
+      project.Run("--no-color");
       System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
 
       project.RunResult.StandardError.Should().BeEmpty();

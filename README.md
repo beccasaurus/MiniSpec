@@ -57,6 +57,8 @@ Spec.Describe("Dog", dog => {
 });
 ```
 
+> Also makes clever use of C# 9 Top-level Statements and C# 7 Local Functions
+
 ## Small
 
 **What if one framework was really tiny and focused on just the testing syntax?**

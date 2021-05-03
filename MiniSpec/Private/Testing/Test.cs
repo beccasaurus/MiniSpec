@@ -23,8 +23,8 @@ namespace MiniSpec.Private.Testing {
     TestStatus _status = TestStatus.NotRun;
     DateTime _runAt = DateTime.Now;
     TimeSpan _duration = TimeSpan.Zero;
-    string _stdout = string.Empty;
-    string _stderr = string.Empty;
+    string _StandardOutput = string.Empty;
+    string _StandardError = string.Empty;
     Exception? _exception;
     object? _returnObject;
     string? _typeName;
@@ -42,8 +42,8 @@ namespace MiniSpec.Private.Testing {
     public TestStatus Status { get => _status; set => _status = value; }
     public DateTime RunAt { get => _runAt; }
     public TimeSpan Duration { get => _duration; }
-    public string STDOUT { get => _stdout; set => _stdout = value; }
-    public string STDERR { get => _stderr; set => _stderr = value; }
+    public string StandardOutput { get => _StandardOutput; set => _StandardOutput = value; }
+    public string StandardError { get => _StandardError; set => _StandardError = value; }
     public Exception? Exception { get => _exception; set => _exception = value; }
     public object? ReturnObject { get => _returnObject; set => _returnObject = value; }
     public string? TypeName { get => _typeName; }

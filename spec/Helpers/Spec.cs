@@ -33,6 +33,7 @@ public class Spec {
         if (name is null) name = Guid.NewGuid().ToString();
         var projectPath = Path.Combine(TemporaryDirectory, name);
         var project = new Project(projectDirectory: projectPath, csharpVersion: csharp, targetFramework: framework, outputType: type);
+        project.CheckPlatformCompatibilityOrSkip(framework);
         project.CreateProjectFile();
         project.CreateNuGetConfigFile();
         return project;

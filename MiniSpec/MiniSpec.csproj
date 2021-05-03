@@ -1,19 +1,53 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
+    <!-- Package Information -->
     <PackageId>MiniSpec</PackageId>
     <Version>1.0.0</Version>
     <Authors>Rebecca Taylor</Authors>
     <Company>Rebecca Taylor</Company>
-    <TargetFrameworks>net20;net50</TargetFrameworks>
-    <!-- <TargetFrameworks>netstandard1.6;net35;net20</TargetFrameworks> -->
+    <Description>Mini Test Framework for .NET</Description>
+    <PackageTags>TDD BDD xUnit Test Testing Spec Specifications</PackageTags>
+    <Product>MiniSpec Test Framework</Product>
+    <Copyright>MIT License, Copyright (c) 2021 Rebecca Taylor</Copyright>
+
+    <!--
+      Target Frameworks (aka ALL TEH FRAMEWORKS)
+      We target every available version because I think that's wonderful and there's no reason not to support literally everyong
+      Note: Making this work requires installing a ton of old targeting packs on Windows so, by default we set this to:
+            - .NET Framwork 2.0 - Support the oldest wonderfulness
+            - .NET 5.0          - Support the latest wonderfulness
+            - .NET Standard 1.6 - Support older standard greatness
+
+      You can set MINISPEC_FRAMEWORKS and this will use that value (which is also used by the test framework and we'll run tests against every version)
+    -->
+    <TargetFrameworks Condition=" '$(MINISPEC_FRAMEWORKS)' == '' ">net20;net48;net50;netstandard2.1;netcoreapp1.0;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(MINISPEC_FRAMEWORKS)' != '' ">$(MINISPEC_FRAMEWORKS)</TargetFrameworks>
+
+    <!-- Uncomment this (and comment out above) to target ALL TEH FRAMEWORKS (when packing for release) [RUN THE TEST AGAINST *ALL* VERSIONS] -->
     <!-- <TargetFrameworks>net50;net48;netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;netstandard1.0;netstandard1.1;netstandard1.2;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;netstandard2.1</TargetFrameworks> -->
+    
+    <!-- Explicitly use C# 9 wonderfulness (some *framework* features aren't available w/ .NET 2.0 and .NET Standard, but C# is mostly sugar and most features are supported!) -->
     <LangVersion>9</LangVersion>
+
+    <!-- Use Nullable Reference Types, it's pretty wonderful and really explicit, much easier when you know a reference type can/'t be null -->
     <Nullable>enable</Nullable>
+
+    <!-- Reflection to get Methods/Constructors/Assemblies changed in .NET 4.5 and beyond (beyond uses .GetTypeInfo()) -->
+    <!-- .NET Standard does not support Assembly.GetAssembly() or .GetMethods or .GetTypes or .GetConstructors -->
+    <!-- For .NET 4.5 and beyond, we use GetTypeInfo and for previous versions we use the .GetMethods() etc methods -->
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net20' Or '$(TargetFramework)' == 'net35' Or '$(TargetFramework)' == 'net40' Or '$(TargetFramework)' == 'net403' ">NO_GET_TYPE_INFO_AVAILABLE</DefineConstants>
+
+    <!-- Output the package to whatever is configured as NUGET_PACKAGES (or in the local folder if this is not configured) -->
     <PackageOutputPath Condition=" '$(NUGET_PACKAGES)' != '' ">$(NUGET_PACKAGES)</PackageOutputPath>
+
+    <!-- Build the package when we `dotnet build` - a bit heavy handed but all of our tests are integration tests which use the package realistically imported -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <!-- Fix for getting .NET 3.5 to build, otherwise it can't find some files! I only have 3.5 successfully building on Windows -->
     <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net35'">$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
     <AutomaticallyUseReferenceAssemblyPackages Condition=" '$(TargetFramework)' == 'net35' ">false</AutomaticallyUseReferenceAssemblyPackages>
-  </PropertyGroup>
 
+    <!-- XML docs for generated documentation -->
+    <!-- <GenerateDocumentationFile>true</GenerateDocumentationFile> -->
+  </PropertyGroup>
 </Project>

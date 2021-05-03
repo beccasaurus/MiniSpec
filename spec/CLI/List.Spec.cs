@@ -7,18 +7,20 @@ namespace Specs.CLI {
   [TestFixture]
   public class ListSpec : Spec {
 
-    [Test]
-    public void List_TopLevelLocalFunctions() {
-      var project = CreateProject(csharp: 9, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
+    [TestCase(Project.TargetFrameworks.Net50)]
+    public void List_TopLevelLocalFunctions(Project.TargetFrameworks framework) {
+      var project = CreateProject(csharp: 9, framework: framework, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
       #pragma warning disable 8321
+
+      using System;
 
       void TestSomething() {}
       void UnreleatedFunction1() {}
       void SpecSomething() {}
       void UnreleatedFunction2() {}
 
-      return MiniSpec.Tests.Run(args);");
+      return MiniSpec.Tests.Run(Console.Out, Console.Error, args);");
 
       project.Run("-l");
       System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
@@ -33,14 +35,25 @@ namespace Specs.CLI {
         output.Should().NotContain(unexpectedTestName);
     }
 
-    [TestCase(Project.TargetFrameworks.Net50)]
+    [TestCase(Project.TargetFrameworks.Core10)]
+    [TestCase(Project.TargetFrameworks.Core11)]
+    [TestCase(Project.TargetFrameworks.Core22)]
+    [TestCase(Project.TargetFrameworks.Core31)]
     [TestCase(Project.TargetFrameworks.Net20)]
+    [TestCase(Project.TargetFrameworks.Net35)]
+    [TestCase(Project.TargetFrameworks.Net40)]
+    [TestCase(Project.TargetFrameworks.Net452)]
+    [TestCase(Project.TargetFrameworks.Net462)]
+    [TestCase(Project.TargetFrameworks.Net48)]
+    [TestCase(Project.TargetFrameworks.Net50)]
     public void List_InstanceMethods(Project.TargetFrameworks framework) {
       var project = CreateProject(framework: framework, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
       #pragma warning disable 8321
 
-      public class Program { public static int Main(string[] args) { return MiniSpec.Tests.Run(args); }}
+      using System;
+
+      public class Program { public static int Main(string[] args) { return MiniSpec.Tests.Run(Console.Out, Console.Error, args); }}
 
       class RegularClass {
         void TestOne() {}
@@ -68,8 +81,6 @@ namespace Specs.CLI {
       ");
 
       project.Run("-l");
-      if (project.RunResult.StandardOutput.Contains("The runtime version supported by this application is unavailable"))
-        Assert.Ignore($"Framework {framework} unsupported on this machine, skipping test");
 
       System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
 
@@ -83,14 +94,25 @@ namespace Specs.CLI {
         output.Should().NotContain(unexpectedTestName);
     }
 
+    [TestCase(Project.TargetFrameworks.Core10)]
+    [TestCase(Project.TargetFrameworks.Core11)]
+    [TestCase(Project.TargetFrameworks.Core22)]
+    [TestCase(Project.TargetFrameworks.Core31)]
     [TestCase(Project.TargetFrameworks.Net20)]
+    [TestCase(Project.TargetFrameworks.Net35)]
+    [TestCase(Project.TargetFrameworks.Net40)]
+    [TestCase(Project.TargetFrameworks.Net452)]
+    [TestCase(Project.TargetFrameworks.Net462)]
+    [TestCase(Project.TargetFrameworks.Net48)]
     [TestCase(Project.TargetFrameworks.Net50)]
     public void List_LocalFunctions(Project.TargetFrameworks framework) {
       var project = CreateProject(framework: framework, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
       #pragma warning disable 8321
 
-      public class Program { public static int Main(string[] args) { return MiniSpec.Tests.Run(args); }}
+      using System;
+
+      public class Program { public static int Main(string[] args) { return MiniSpec.Tests.Run(Console.Out, Console.Error, args); }}
 
       class RegularClass {
         void RegularMethod() {
@@ -115,8 +137,6 @@ namespace Specs.CLI {
       ");
 
       project.Run("-l");
-      if (project.RunResult.StandardOutput.Contains("The runtime version supported by this application is unavailable"))
-        Assert.Ignore($"Framework {framework} unsupported on this machine, skipping test");
       System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
 
       project.RunResult.StandardError.Should().BeEmpty();
@@ -129,11 +149,12 @@ namespace Specs.CLI {
         output.Should().NotContain(unexpectedTestName);
     }
 
-    [Test]
-    public void List_BDD_TopLevelStatements() {
-      var project = CreateProject(csharp: 9, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
+    [TestCase(Project.TargetFrameworks.Net50)]
+    public void List_BDD_TopLevelStatements(Project.TargetFrameworks framework) {
+      var project = CreateProject(csharp: 9, framework: framework, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
 
+      using System;
       using static MiniSpec.Spec;
 
       Describe(""Dog"", dog => {
@@ -146,7 +167,7 @@ namespace Specs.CLI {
         });
       });
 
-      return MiniSpec.Tests.Run(args);");
+      return MiniSpec.Tests.Run(Console.Out, Console.Error, args);");
 
       project.Run("-l");
       System.Console.WriteLine($"OUTPUT: {project.RunResult.StandardOutput}");
@@ -161,13 +182,14 @@ namespace Specs.CLI {
       output.Should().Contain("Dog Barking Should Be Quiet");
     }
 
-    [Test]
-    public void List_BDD_DefinedInClasses() {
-      var project = CreateProject(csharp: 9, framework: Project.TargetFrameworks.Net50, type: Project.OutputTypes.Exe);
+    [TestCase(Project.TargetFrameworks.Net50)]
+    public void List_BDD_DefinedInClasses(Project.TargetFrameworks framework) {
+      var project = CreateProject(csharp: 9, framework: framework, type: Project.OutputTypes.Exe);
       project.WriteFile("Program.cs", @"
+      using System;
       using MiniSpec;
 
-      return MiniSpec.Tests.Run(args);
+      return MiniSpec.Tests.Run(Console.Out, Console.Error, args);
 
       class Specs {
         Specs() {
