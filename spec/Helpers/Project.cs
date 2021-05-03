@@ -46,7 +46,7 @@ public class Project {
   }
 
   public enum OutputTypes { Library, Exe }
-    public enum TargetFrameworks { Net50, Net48, Net462, Net452, Net40, Net35, Net20, Core10, Core11, Core22, Core31, Standard10, Standard20, Standard21 }
+    public enum TargetFrameworks { Net50, Net48, Net462, Net452, Net40, Net35, Net20, Core10, Core11, Core21, Core22, Core31, Standard10, Standard20, Standard21 }
 
     public Dictionary<TargetFrameworks,string> TargetFrameworkNames = new() {
         { TargetFrameworks.Net50, "net50" },
@@ -58,6 +58,7 @@ public class Project {
         { TargetFrameworks.Net20, "net20" },
         { TargetFrameworks.Core10, "netcoreapp1.0" },
         { TargetFrameworks.Core11, "netcoreapp1.1" },
+        { TargetFrameworks.Core21, "netcoreapp2.1" },
         { TargetFrameworks.Core22, "netcoreapp2.2" },
         { TargetFrameworks.Core31, "netcoreapp3.1" },
         { TargetFrameworks.Standard10, "netstandard1.0" },
