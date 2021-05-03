@@ -7,6 +7,7 @@
 - [X] Basic BDD Syntax
 - [ ] Setup and Teardown
 - [ ] Dependency Injection
+- [ ] Async Tests
 - [ ] Config from .minispec file
 - [ ] Config environment variables
 - [ ] Config from CLI options
