@@ -10,9 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        dotnet-version: [ '1.0.x', '1.1.x', '2.0.x', '2.1.x', '2.2.x', '3.0.x', '3.1.x', '5.0.x' ]
 
     steps:
 
@@ -20,10 +17,10 @@ jobs:
       run: sudo apt update && sudo apt install mono-devel
     - uses: actions/checkout@v2
 
-    - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+    - name: Setup .NET Core SDK Versions
       uses: actions/setup-dotnet@v1.7.2
       with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+        dotnet-version: [ '1.0.x', '1.1.x', '2.0.x', '2.1.x', '2.2.x', '3.0.x', '3.1.x', '5.0.x' ]
 
     - name: Setup default NUGET_PACKAGES
       run: mkdir /tmp/globalPackagesFolder/
