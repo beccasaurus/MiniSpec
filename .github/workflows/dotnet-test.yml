@@ -30,7 +30,7 @@ jobs:
       env:
         NUGET_PACKAGES: /tmp/globalPackagesFolder/
     - name: Build
-      run: dotnet build --Config Release --no-restore
+      run: dotnet build --configuration Release --no-restore
       env:
         NUGET_PACKAGES: /tmp/globalPackagesFolder/
         MINISPEC_FRAMEWORKS: "net50"
