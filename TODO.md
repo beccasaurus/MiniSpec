@@ -7,6 +7,9 @@
 - [X] Basic BDD Syntax
 - [ ] Setup and Teardown
 - [ ] Dependency Injection
+- [ ] Config from .minispec file
+- [ ] Config environment variables
+- [ ] Config from CLI options
 - [ ] Extensibility
 - [ ] Console
 - [ ] Tool
