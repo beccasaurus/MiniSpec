@@ -17,10 +17,45 @@ jobs:
       run: sudo apt update && sudo apt install mono-devel
     - uses: actions/checkout@v2
 
-    - name: Setup .NET Core SDK Versions
+    - name: Setup .NET Core SDK 1.0
       uses: actions/setup-dotnet@v1.7.2
       with:
-        dotnet-version: [ '1.0.x', '1.1.x', '2.0.x', '2.1.x', '2.2.x', '3.0.x', '3.1.x', '5.0.x' ]
+        dotnet-version: 1.0.x
+
+    - name: Setup .NET Core SDK 1.1
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 1.1.x
+
+    - name: Setup .NET Core SDK 2.0
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 2.0.x
+
+    - name: Setup .NET Core SDK 2.1
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 2.1.x
+
+    - name: Setup .NET Core SDK 2.2
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 2.2.x
+
+    - name: Setup .NET Core SDK 3.0
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 3.0.x
+
+    - name: Setup .NET Core SDK 3.1
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 3.1.x
+
+    - name: Setup .NET Core SDK 5.0
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 5.0.x
 
     - name: Setup default NUGET_PACKAGES
       run: mkdir /tmp/globalPackagesFolder/
