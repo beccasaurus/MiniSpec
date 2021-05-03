@@ -15,25 +15,33 @@ jobs:
         dotnet-version: ['5.0.x' ]
 
     steps:
+
     - name: Install Mono
       run: sudo apt update && sudo apt install mono-devel
     - uses: actions/checkout@v2
+
     - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
       uses: actions/setup-dotnet@v1.7.2
       with:
         dotnet-version: ${{ matrix.dotnet-version }}
+
     - name: Setup default NUGET_PACKAGES
       run: mkdir /tmp/globalPackagesFolder/
       shell: bash
+
     - name: Install dependencies
       run: dotnet restore
+      working-directory: MiniSpec
       env:
         NUGET_PACKAGES: /tmp/globalPackagesFolder/
+
     - name: Build
       run: dotnet build --configuration Release --no-restore
+      working-directory: MiniSpec
       env:
         NUGET_PACKAGES: /tmp/globalPackagesFolder/
         MINISPEC_FRAMEWORKS: "net50;netcoreapp3.1"
+
     - name: Test
       run: dotnet test --verbosity normal
       working-directory: spec
