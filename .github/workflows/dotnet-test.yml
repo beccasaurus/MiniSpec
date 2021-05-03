@@ -35,7 +35,8 @@ jobs:
         NUGET_PACKAGES: /tmp/globalPackagesFolder/
         MINISPEC_FRAMEWORKS: "net50;netcoreapp3.1"
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test --verbosity normal
+      working-directory: spec
       env:
         NUGET_PACKAGES: /tmp/globalPackagesFolder/
         MINISPEC_FRAMEWORKS: "net50;netcoreapp3.1"
