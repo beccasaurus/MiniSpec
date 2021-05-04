@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using MiniSpec.Testing;
 
 namespace MiniSpec.Private.Testing {
-  internal class Test : ITest {
+  public class Test : ITest {
     internal Test(TestFunc<object?> invoke, string name, string fullName, string? typeName, string? methodName, string? assemblyLocation, MethodInfo? method, Assembly? assembly) {
       _invoke = invoke;
       _name = name;

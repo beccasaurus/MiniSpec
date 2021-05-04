@@ -26,7 +26,8 @@ public class Spec {
 
     [TearDown]
     public void TearDown() {
-        if (TemporaryDirectoryExists) Directory.Delete(TemporaryDirectory, recursive: true);
+        if (Environment.GetEnvironmentVariable("KEEP_FILES") != "true")
+            if (TemporaryDirectoryExists) Directory.Delete(TemporaryDirectory, recursive: true);
     }
     
     public Project CreateProject(string name = null, int csharp = 0, Project.TargetFrameworks framework = Project.TargetFrameworks.Net50, Project.OutputTypes type = Project.OutputTypes.Library, bool includeMiniSpec = true, string packageName = null, string packageOutputPath = null, string packagesFolder = null, string assemblyName = null) {

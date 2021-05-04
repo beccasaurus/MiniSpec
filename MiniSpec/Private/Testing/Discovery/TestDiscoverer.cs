@@ -57,7 +57,7 @@ namespace MiniSpec.Private.Testing.Discovery {
       if (suite.Config is null)
         throw new Exception("Please set ITestSuite.Config before calling DiscoverTests");
 
-      foreach (var type in assembly.GetTypes()) {
+      foreach (var type in assembly.GetTypes()) { // Is GetTypes supported in all versions of .NET Standard - TODO: verify
         var typeHasAnyTests = false;
 
         #if NO_GET_TYPE_INFO_AVAILABLE

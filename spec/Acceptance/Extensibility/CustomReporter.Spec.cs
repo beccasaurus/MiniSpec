@@ -9,14 +9,17 @@ namespace Specs.xUnit
   {
 
     [TestCase(Project.TargetFrameworks.Net50)]
-    public void CustomReporterTest(Project.TargetFrameworks framework) {
+    public void DynamicCustomReporterTestWhichDoesNotImportMiniSpec(Project.TargetFrameworks framework) {
       var packagesFolder = CreateDirectory("Packages");
 
-      var extensionProject = CreateProject(name: "CoolReporter", assemblyName: "MiniSpec.CoolReporter", csharp: 9, framework: framework, type: Project.OutputTypes.Library, includeMiniSpec: false, packageOutputPath: packagesFolder);
+      var extensionProject = CreateProject(name: "CoolReporter", packageName: "CoolReporter", assemblyName: "MiniSpec.CoolReporter", csharp: 9, framework: framework, type: Project.OutputTypes.Library, includeMiniSpec: false, packageOutputPath: packagesFolder);
       extensionProject.WriteFile("CoolReporter.cs", @"
       public class CoolReporter {
+        public void BeforeTest(dynamic suite, dynamic test) {
+          suite.Config.StandardOutput.WriteLine($""Running {test.FullName}..."");
+        }
         public void AfterTest(dynamic suite, dynamic test) {
-          System.Console.WriteLine(""Hello! The {test.FullName} test ran and the result was {test.Status}"");
+          suite.Config.StandardOutput.WriteLine($""Hello! The {test.FullName} test ran and the result was {test.Status}"");
         }
       }");
       extensionProject.Build();
@@ -31,7 +34,10 @@ namespace Specs.xUnit
       bool TestShouldFail() => false;
 
       return MiniSpec.Tests.Run(Console.Out, Console.Error, args);");
-      testProject.RunCommand("dotnet", "add", "package", "CoolReporter");
+
+      testProject.RunCommand("dotnet", "add", "package", "CoolReporter").OK.Should().BeTrue();
+      // System.Console.WriteLine($"PACKAGE INSTALL OUTPUT {packageInstallResult.StandardOutput}");
+      // System.Console.WriteLine($"PACKAGE INSTALL ERROR {packageInstallResult.StandardError}");
 
       testProject.Run();
 
@@ -41,7 +47,7 @@ namespace Specs.xUnit
       testProject.RunResult.Failed.Should().BeTrue();
 
       var output = testProject.RunResult.StandardOutput;
-      output.Should().Contain("Helo! the TestShouldPass test ran and the result was ?????");
+      output.Should().Contain("Hello! the TestShouldPass test ran and the result was ?????");
       // output.Should().Contain("Kaboom!");
     }
   }

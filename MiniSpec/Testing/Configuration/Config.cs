@@ -4,6 +4,8 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+using MiniSpec.Testing.Extensibility;
+
 namespace MiniSpec.Testing.Configuration {
   public class Config : IConfig
   {
@@ -49,6 +51,7 @@ namespace MiniSpec.Testing.Configuration {
     TextWriter _standardOutput = new StringWriter();
     TextWriter _standardError = new StringWriter();
     IList<string> _assemblyPaths = new List<string>();
+    ExtensionRegistry _extensibilityRegistry = new ExtensionRegistry();
     IDictionary<string, object> _meta = new Dictionary<string, object>();
     IList<Regex> _testNamePatterns = new List<Regex>();
     IList<Regex> _testGroupPatterns = new List<Regex>();
@@ -68,6 +71,7 @@ namespace MiniSpec.Testing.Configuration {
     public bool DryRun { get; set; }
     public bool ShowColors { get; set; }
     public string? OutputFile { get; set;  }
+    public ExtensionRegistry ExtensionRegistry { get => _extensibilityRegistry; set => _extensibilityRegistry = value; }
     public ITestSuiteExecutor? TestSuiteExecutor { get; set; }
     public ITestExecutor? TestExecutor { get; set; }
     public ITestReporter? TestReporter { get; set; }

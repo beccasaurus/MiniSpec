@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 using MiniSpec.Testing.Configuration;
-
+using MiniSpec.Testing.Extensibility;
 namespace MiniSpec.Testing.CommandLineInterface {
     public static class Runner {
         public static int Run(IConfig config, params string[] arguments) {
@@ -13,6 +13,8 @@ namespace MiniSpec.Testing.CommandLineInterface {
 
             var parseResult = new Parser().ParseArguments(config, new List<string>(arguments));
             if (parseResult is not null) return parseResult.GetValueOrDefault();
+
+            new ExtensionDiscoverer().DiscoverExtensions(testSuite);
 
             config.TestDiscoverer!.DiscoverTests(testSuite);
             var testResult = config.TestSuiteExecutor!.RunTestSuite(testSuite);

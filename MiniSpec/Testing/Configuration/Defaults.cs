@@ -10,13 +10,15 @@ using MiniSpec.Private.Testing.Reporters;
 namespace MiniSpec.Testing.Configuration {
   public static class Defaults {
     public static IConfig SetValues(IConfig Config) {
+      Config.WorkingDirectory ??= Environment.CurrentDirectory;
       Config.TestSuiteExecutor = Config.TestSuiteExecutor ?? TestSuiteExecutor;
       Config.TestExecutor = Config.TestExecutor ?? TestExecutor;
       Config.TestReporter = Config.TestReporter ?? TestReporter;
       Config.TestDiscoverer = Config.TestDiscoverer ?? TestDiscoverer;
+      Config.ExtensionRegistry = Config.ExtensionRegistry ?? new Extensibility.ExtensionRegistry();
 
       //
-Config.TestNamePatterns = new List<Regex>() { new Regex("^[A-Z].*Test"), new Regex("^[A-Z].*Spec"), new Regex("^Test"), new Regex("^Spec") };
+      Config.TestNamePatterns = new List<Regex>() { new Regex("^[A-Z].*Test"), new Regex("^[A-Z].*Spec"), new Regex("^Test"), new Regex("^Spec") };
 Config.TestGroupPatterns = new List<Regex>() { new Regex("^[A-Z].*Test"), new Regex("^[A-Z].*Spec"), new Regex("^Test"), new Regex("^Spec") };
 Config.SpecGroupPatterns = new List<Regex>() { new Regex("^[A-Z].*Spec"), new Regex("^Spec") };
 Config.TestNameWithinGroupPatterns = new List<Regex>() { new Regex("^[A-Z].*Test"), new Regex("^[A-Z].*Spec"), new Regex("^Test"), new Regex("^Spec"), new Regex("^It"), new Regex("^Can"), new Regex("^Should"), new Regex("^Example") };

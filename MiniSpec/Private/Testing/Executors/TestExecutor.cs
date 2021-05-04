@@ -16,9 +16,11 @@ namespace MiniSpec.Private.Testing.Executors {
       Console.SetOut(mockStandardOutput);
       Console.SetError(mockStandardError);
 
+      suite.Config.StandardOutput.WriteLine("Shout out to 'Before Test' here ...");
       suite.Config.TestReporter.BeforeTest(suite, test);
       try {
         test.ReturnObject = test.Invoke();
+        suite.Config.StandardOutput.WriteLine("Hi there.");
         if (test.Method is not null) {
           if (test.Method.ReturnType == typeof(bool)) {
             test.Status = (test.ReturnObject is bool && (bool) test.ReturnObject == true) ? TestStatus.Passed : TestStatus.Failed;
@@ -26,6 +28,7 @@ namespace MiniSpec.Private.Testing.Executors {
             test.Status = TestStatus.Passed;
           }
         }
+        suite.Config.StandardOutput.WriteLine($"So the status here is {test.Status}");
       } catch (Exception e) {
         test.Exception = e;
         test.Status = TestStatus.Failed;
@@ -35,6 +38,7 @@ namespace MiniSpec.Private.Testing.Executors {
         test.StandardOutput = mockStandardOutput.ToString();
         test.StandardError = mockStandardError.ToString();
       }
+      suite.Config.StandardOutput.WriteLine($"Calling after test with {test.FullName} which has status of {test.Status}");
       suite.Config.TestReporter.AfterTest(suite, test);
       return test.Status;
     }

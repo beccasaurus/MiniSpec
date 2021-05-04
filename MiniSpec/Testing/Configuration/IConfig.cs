@@ -2,6 +2,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+using MiniSpec.Testing.Extensibility;
+
 namespace MiniSpec.Testing.Configuration {
 
   public interface IConfig {
@@ -13,6 +15,7 @@ namespace MiniSpec.Testing.Configuration {
     bool DryRun { get; set; }
     bool ShowColors { get; set; }
     string? OutputFile { get; set; }
+    ExtensionRegistry ExtensionRegistry { get; set; }
     ITestSuiteExecutor? TestSuiteExecutor { get; set; }
     ITestExecutor? TestExecutor { get; set; }
     ITestReporter? TestReporter { get; set; }
